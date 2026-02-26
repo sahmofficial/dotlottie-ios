@@ -782,9 +782,9 @@ open class DotLottiePlayerUIView: PlatformView {
     /// Loads and starts the given state machine from the manifest.
     /// This stops any running state machine before starting the requested one.
     @discardableResult
-    public func startStateMachine(id: String, whitelist: [String] = [], requireUserInteraction: Bool = true) -> Bool {
+    public func startStateMachine(id: String, openUrlPolicy: OpenUrlPolicy = OpenUrlPolicy()) -> Bool {
         guard let dotLottieAnimation else { return false }
-        return dotLottieAnimation.stateMachineStart(id: id, whitelist: whitelist, requireUserInteraction: requireUserInteraction)
+        return dotLottieAnimation.stateMachineStart(id: id, openUrlPolicy: openUrlPolicy)
     }
     
     /// Stops the state machine

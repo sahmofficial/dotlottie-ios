@@ -295,8 +295,8 @@ class Player: ObservableObject {
         dotLottiePlayer.stateMachineLoadData(stateMachine: data)
     }
     
-    public func stateMachineStart(whitelist: [String] = [], requireUserInteraction: Bool = true) -> Bool {
-        return dotLottiePlayer.stateMachineStart(whitelist: whitelist, requireUserInteraction: requireUserInteraction)
+    public func stateMachineStart(openUrlPolicy: OpenUrlPolicy = OpenUrlPolicy()) -> Bool {
+        return dotLottiePlayer.stateMachineStart(openUrlPolicy: openUrlPolicy)
     }
     
     public func stateMachineStop() -> Bool {

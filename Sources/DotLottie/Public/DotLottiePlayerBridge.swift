@@ -252,6 +252,18 @@ public struct Marker {
     }
 }
 
+// MARK: - OpenUrlPolicy
+
+public struct OpenUrlPolicy: Equatable, Hashable {
+    public var requireUserInteraction: Bool
+    public var whitelist: [String]
+
+    public init(requireUserInteraction: Bool = true, whitelist: [String] = []) {
+        self.requireUserInteraction = requireUserInteraction
+        self.whitelist = whitelist
+    }
+}
+
 // MARK: - Events
 
 public enum Event {
@@ -966,13 +978,13 @@ public class DotLottiePlayer {
         return stateMachinePtr != nil
     }
 
-    public func stateMachineStart(whitelist: [String] = [], requireUserInteraction: Bool = true) -> Bool {
+    public func stateMachineStart(openUrlPolicy: OpenUrlPolicy = OpenUrlPolicy()) -> Bool {
         guard let smPtr = stateMachinePtr else { return false }
-        let whitelistStr = whitelist.joined(separator: ",")
+        let whitelistStr = openUrlPolicy.whitelist.joined(separator: ",")
         if whitelistStr.isEmpty {
-            return dotlottie_state_machine_start(smPtr, nil, requireUserInteraction) == Success
+            return dotlottie_state_machine_start(smPtr, nil, openUrlPolicy.requireUserInteraction) == Success
         }
-        return whitelistStr.withCString { dotlottie_state_machine_start(smPtr, $0, requireUserInteraction) == Success }
+        return whitelistStr.withCString { dotlottie_state_machine_start(smPtr, $0, openUrlPolicy.requireUserInteraction) == Success }
     }
 
     @discardableResult

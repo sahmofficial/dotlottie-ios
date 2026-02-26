@@ -182,7 +182,7 @@ final class DotLottieTests: XCTestCase {
         let loaded = animation.stateMachineLoadData(minimalStateMachineJSON)
         try XCTSkipUnless(loaded, "State machine data format not accepted by engine – skipping")
         
-        let started = animation.stateMachineStart(requireUserInteraction: false)
+        let started = animation.stateMachineStart(openUrlPolicy: OpenUrlPolicy(requireUserInteraction: false))
         XCTAssertTrue(started, "State machine should start successfully")
         
         XCTAssertTrue(animation.stateMachineSetBooleanInput(key: "isActive", value: true))
@@ -198,7 +198,7 @@ final class DotLottieTests: XCTestCase {
         let loaded = animation.stateMachineLoadData(minimalStateMachineJSON)
         try XCTSkipUnless(loaded, "State machine data format not accepted by engine – skipping")
         
-        let started = animation.stateMachineStart(requireUserInteraction: false)
+        let started = animation.stateMachineStart(openUrlPolicy: OpenUrlPolicy(requireUserInteraction: false))
         XCTAssertTrue(started, "State machine should start successfully")
         
         XCTAssertTrue(animation.stateMachineSetNumericInput(key: "count", value: 42.0))
@@ -216,7 +216,7 @@ final class DotLottieTests: XCTestCase {
         let loaded = animation.stateMachineLoadData(minimalStateMachineJSON)
         try XCTSkipUnless(loaded, "State machine data format not accepted by engine – skipping")
         
-        let started = animation.stateMachineStart(requireUserInteraction: false)
+        let started = animation.stateMachineStart(openUrlPolicy: OpenUrlPolicy(requireUserInteraction: false))
         XCTAssertTrue(started, "State machine should start successfully")
         
         XCTAssertTrue(animation.stateMachineSetStringInput(key: "word", value: "new"))

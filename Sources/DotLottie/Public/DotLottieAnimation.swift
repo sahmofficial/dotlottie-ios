@@ -571,8 +571,8 @@ public final class DotLottieAnimation: ObservableObject {
         return stop
     }
     
-    public func stateMachineStart(whitelist: [String] = [], requireUserInteraction: Bool = true) -> Bool {
-        let sm = player.stateMachineStart(whitelist: whitelist, requireUserInteraction: requireUserInteraction)
+    public func stateMachineStart(openUrlPolicy: OpenUrlPolicy = OpenUrlPolicy()) -> Bool {
+        let sm = player.stateMachineStart(openUrlPolicy: openUrlPolicy)
 
         let _ = player.stateMachineInternalSubscribe(observer: self.internalStateMachineObserver)
 
@@ -584,10 +584,10 @@ public final class DotLottieAnimation: ObservableObject {
     /// Convenience helper to load and start a specific state machine by id.
     /// It stops any running state machine, loads the requested one, and starts it.
     @discardableResult
-    public func stateMachineStart(id: String, whitelist: [String] = [], requireUserInteraction: Bool = true) -> Bool {
+    public func stateMachineStart(id: String, openUrlPolicy: OpenUrlPolicy = OpenUrlPolicy()) -> Bool {
         _ = stateMachineStop()
         guard stateMachineLoad(id: id) else { return false }
-        return stateMachineStart(whitelist: whitelist, requireUserInteraction: requireUserInteraction)
+        return stateMachineStart(openUrlPolicy: openUrlPolicy)
     }
     
     public func stateMachinePostEvent(_ event: Event, force: Bool? = false) {
