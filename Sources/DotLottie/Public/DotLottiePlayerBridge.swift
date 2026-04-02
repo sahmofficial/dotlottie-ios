@@ -185,36 +185,51 @@ public struct Config {
 public struct Manifest {
     public var generator: String?
     public var version: String?
-    public var animations: [ManifestAnimation]?
+    public var animations: [ManifestAnimation]
     public var themes: [ManifestTheme]?
     public var stateMachines: [ManifestStateMachine]?
+    public var initial: ManifestInitial?
 
     public init(
         generator: String? = nil,
         version: String? = nil,
-        animations: [ManifestAnimation]? = nil,
+        animations: [ManifestAnimation],
         themes: [ManifestTheme]? = nil,
-        stateMachines: [ManifestStateMachine]? = nil
+        stateMachines: [ManifestStateMachine]? = nil,
+        initial: ManifestInitial? = nil
     ) {
         self.generator = generator
         self.version = version
         self.animations = animations
         self.themes = themes
         self.stateMachines = stateMachines
+        self.initial = initial
+    }
+}
+
+public struct ManifestInitial {
+    public var stateMachine: String?
+    public var animation: String?
+
+    public init(stateMachine: String? = nil, animation: String? = nil) {
+        self.stateMachine = stateMachine
+        self.animation = animation
     }
 }
 
 public struct ManifestAnimation {
-    public var id: String?
+    public var id: String
     public var name: String?
     public var initialTheme: String?
     public var background: String?
+    public var themes: [String]?
 
-    public init(id: String? = nil, name: String? = nil, initialTheme: String? = nil, background: String? = nil) {
+    public init(id: String, name: String? = nil, initialTheme: String? = nil, background: String? = nil, themes: [String]? = nil) {
         self.id = id
         self.name = name
         self.initialTheme = initialTheme
         self.background = background
+        self.themes = themes
     }
 }
 
@@ -789,15 +804,25 @@ public class DotLottiePlayer {
 
         let generator = obj["generator"] as? String
         let version = obj["version"] as? String
+        
+        var initial: ManifestInitial? = nil
+        if let initialObj = obj["initial"] as? [String: Any] {
+            initial = ManifestInitial(
+                stateMachine: initialObj["stateMachine"] as? String,
+                animation: initialObj["animation"] as? String
+            )
+        }
 
         var animations: [ManifestAnimation] = []
         if let anims = obj["animations"] as? [[String: Any]] {
-            animations = anims.map { anim in
-                ManifestAnimation(
-                    id: anim["id"] as? String,
+            animations = anims.compactMap { anim in
+                guard let id = anim["id"] as? String else { return nil }
+                return ManifestAnimation(
+                    id: id,
                     name: anim["name"] as? String,
                     initialTheme: anim["initialTheme"] as? String,
-                    background: anim["background"] as? String
+                    background: anim["background"] as? String,
+                    themes: anim["themes"] as? [String]
                 )
             }
         }
@@ -821,9 +846,10 @@ public class DotLottiePlayer {
         return Manifest(
             generator: generator,
             version: version,
-            animations: animations.isEmpty ? nil : animations,
+            animations: animations.isEmpty ? [] : animations,
             themes: themes.isEmpty ? nil : themes,
-            stateMachines: stateMachines.isEmpty ? nil : stateMachines
+            stateMachines: stateMachines.isEmpty ? nil : stateMachines,
+            initial: initial
         )
     }
 
