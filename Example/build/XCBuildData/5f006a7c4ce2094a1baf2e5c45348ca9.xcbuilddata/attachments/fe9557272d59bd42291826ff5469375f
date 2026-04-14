@@ -1,4 +1,0 @@
-module DotLottie {
-header "DotLottie-Swift.h"
-export *
-}

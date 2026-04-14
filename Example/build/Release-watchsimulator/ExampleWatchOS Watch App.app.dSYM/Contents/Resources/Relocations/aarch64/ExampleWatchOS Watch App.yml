@@ -1,5 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     '/Users/sam/Work/Github/dotlottie-ios/Example/build/Release-watchsimulator/ExampleWatchOS Watch App.app/ExampleWatchOS Watch App'
-relocations:     []
-...

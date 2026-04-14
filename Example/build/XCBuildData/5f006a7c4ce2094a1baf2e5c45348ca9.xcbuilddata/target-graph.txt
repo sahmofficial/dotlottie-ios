@@ -1,6 +1,0 @@
-Target dependency graph (3 targets)
-Target 'ExampleWatchOS Watch App' in project 'Example'
-➜ Explicit dependency on target 'DotLottie' in project 'DotLottie'
-Target 'DotLottie' in project 'DotLottie'
-➜ Explicit dependency on target 'DotLottie' in project 'DotLottie'
-Target 'DotLottie' in project 'DotLottie' (no dependencies)

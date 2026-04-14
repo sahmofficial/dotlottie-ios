@@ -1,2 +1,0 @@
-Target dependency graph (1 target)
-Target 'ExampleWatchOS Watch App' in project 'Example' (no dependencies)
