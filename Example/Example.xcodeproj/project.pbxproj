@@ -139,9 +139,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		226493102F8D053A00C13D12 /* ExampleWatchOS Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "ExampleWatchOS Watch App"; sourceTree = "<group>"; };
-		2264931E2F8D053B00C13D12 /* ExampleWatchOS Watch AppTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "ExampleWatchOS Watch AppTests"; sourceTree = "<group>"; };
-		226493282F8D053B00C13D12 /* ExampleWatchOS Watch AppUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "ExampleWatchOS Watch AppUITests"; sourceTree = "<group>"; };
 		22ED4A8C2F4C7D9300BEEB42 /* DotLottieTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DotLottieTests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -245,9 +242,6 @@
 			children = (
 				226C88AE2AFE98FC00A72D3A /* Example */,
 				22ED4A8C2F4C7D9300BEEB42 /* DotLottieTests */,
-				226493102F8D053A00C13D12 /* ExampleWatchOS Watch App */,
-				2264931E2F8D053B00C13D12 /* ExampleWatchOS Watch AppTests */,
-				226493282F8D053B00C13D12 /* ExampleWatchOS Watch AppUITests */,
 				226C88AD2AFE98FC00A72D3A /* Products */,
 				226C88BF2AFE993700A72D3A /* Frameworks */,
 			);
@@ -329,9 +323,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				226493102F8D053A00C13D12 /* ExampleWatchOS Watch App */,
-			);
 			name = "ExampleWatchOS Watch App";
 			packageProductDependencies = (
 				2264933A2F8D053B00C13D12 /* DotLottie */,
@@ -353,9 +344,6 @@
 			dependencies = (
 				2264931D2F8D053B00C13D12 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				2264931E2F8D053B00C13D12 /* ExampleWatchOS Watch AppTests */,
-			);
 			name = "ExampleWatchOS Watch AppTests";
 			packageProductDependencies = (
 			);
@@ -375,9 +363,6 @@
 			);
 			dependencies = (
 				226493272F8D053B00C13D12 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				226493282F8D053B00C13D12 /* ExampleWatchOS Watch AppUITests */,
 			);
 			name = "ExampleWatchOS Watch AppUITests";
 			packageProductDependencies = (
