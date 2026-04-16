@@ -8,8 +8,11 @@
 
 ## Supported Devices
 
-Currently this package supports a mimimum iOS version of 13.0+ for iPhone and iPad.
-MacOS is supported for versions 11.0 and upwards.
+- Currently this package supports a mimimum iOS version of 13.0+ for iPhone and iPad.
+- macOS is supported for versions 11.0+.
+- watchOS is supported for v7.0+.
+- tvOS is supported for v7.0+.
+- visionOS is supported for v1.0+.
 
 ## Usage
 
