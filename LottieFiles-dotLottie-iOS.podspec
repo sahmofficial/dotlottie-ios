@@ -23,12 +23,9 @@ This is a temporary pod name until we regain ownership of dotLottie-iOS. Use thi
   spec.swift_version = '5.0'
   spec.ios.deployment_target = "13.0"
   spec.osx.deployment_target = "11.0"
- # spec.watchos.deployment_target = '7.0'
-  spec.tvos.deployment_target = "13.0"
-  spec.visionos.deployment_target = "1.0"
 
   spec.source_files = 'Sources/DotLottie/**/*.{swift,h,m}'
-  spec.vendored_frameworks = 'Sources/DotLottieCore/DotLottiePlayerDynamic.xcframework'
+  spec.vendored_frameworks = 'Sources/DotLottieCore/cocoapods/DotLottiePlayer.xcframework'
 
   spec.requires_arc = true
 

@@ -7,4 +7,4 @@ xcodebuild -create-xcframework \
     -framework Sources/DotLottieCore/DotLottiePlayer.xcframework/tvos-arm64-simulator/DotLottiePlayer.framework \
     -framework Sources/DotLottieCore/DotLottiePlayer.xcframework/xros-arm64/DotLottiePlayer.framework \
     -framework Sources/DotLottieCore/DotLottiePlayer.xcframework/xros-arm64-simulator/DotLottiePlayer.framework \
-    -output Sources/DotLottieCore/DotLottiePlayerDynamic.xcframework
+    -output Sources/DotLottieCore/cocoapods/DotLottiePlayer.xcframework
