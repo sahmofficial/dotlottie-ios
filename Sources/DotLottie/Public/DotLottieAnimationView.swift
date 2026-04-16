@@ -1,4 +1,4 @@
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS) || os(visionOS)
 import Foundation
 import UIKit
 import Metal
@@ -8,7 +8,7 @@ import AVFoundation
 import Combine
 
 public typealias PlatformViewBase = UIView
-#elseif canImport(AppKit)
+#elseif os(macOS)
 import Foundation
 import AppKit
 import Metal
@@ -20,7 +20,7 @@ import Combine
 public typealias PlatformViewBase = NSView
 #endif
 
-#if canImport(UIKit) || canImport(AppKit)
+#if os(iOS) || os(tvOS) || os(visionOS) || os(macOS)
 
 // Platform animation view for UIKit/AppKit
 public class DotLottieAnimationView: PlatformViewBase, DotLottie {
@@ -61,7 +61,7 @@ public class DotLottieAnimationView: PlatformViewBase, DotLottie {
         // Set up Metal-related configurations for your MTKView
         mtkView.device = MTLCreateSystemDefaultDevice()
         
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS) || os(visionOS)
         mtkView.isOpaque = false
 #else
         mtkView.layer?.isOpaque = false

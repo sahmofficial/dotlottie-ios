@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import CoreImage
+import CoreGraphics
 import DotLottiePlayer
 
 class Player: ObservableObject {
@@ -14,14 +14,7 @@ class Player: ObservableObject {
 
     public var WIDTH: UInt32 = 512
     public var HEIGHT: UInt32 = 512
-
-    // Rendering mode
-    public enum RenderMode {
-        case software
-        case webgpu
-    }
-    public var renderMode: RenderMode = .software
-
+    
     // Software rendering buffer
     private var renderBuffer: UnsafeMutablePointer<UInt32>?
     private var bufferSize: Int = 0
@@ -43,16 +36,10 @@ class Player: ObservableObject {
     public func loadAnimationData(animationData: String, width: Int, height: Int) throws {
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-
-        // Allocate buffer and set render target BEFORE loading animation (only for software mode)
-        if renderMode == .software {
-            try allocateRenderBuffer()
-        }
-
-        if (!dotLottiePlayer
-            .loadAnimationData(animationData: animationData,
-                               width: self.WIDTH,
-                               height: self.HEIGHT)) {
+        
+        try allocateRenderBuffer()
+        
+        if (!dotLottiePlayer.loadAnimationData(animationData: animationData)) {
             throw AnimationLoadErrors.loadAnimationDataError
         }
     }
@@ -60,13 +47,10 @@ class Player: ObservableObject {
     func loadDotlottieData(data: Data, width: Int, height: Int) throws {
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-
-        // Allocate buffer and set render target BEFORE loading animation (only for software mode)
-        if renderMode == .software {
-            try allocateRenderBuffer()
-        }
-
-        if (!dotLottiePlayer.loadDotlottieData(fileData: data, width: self.WIDTH, height: self.HEIGHT)) {
+        
+        try allocateRenderBuffer()
+        
+        if (!dotLottiePlayer.loadDotlottieData(fileData: data)) {
             throw AnimationLoadErrors.loadAnimationDataError
         }
     }
@@ -74,31 +58,25 @@ class Player: ObservableObject {
     public func loadAnimationPath(animationPath: String, width: Int, height: Int) throws {
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-
-        // Allocate buffer and set render target BEFORE loading animation (only for software mode)
-        if renderMode == .software {
-            try allocateRenderBuffer()
-        }
-
-        if (!dotLottiePlayer.loadAnimationPath(animationPath: animationPath,
-                                               width: self.WIDTH,
-                                               height: self.HEIGHT)) {
+        
+        try allocateRenderBuffer()
+        
+        if (!dotLottiePlayer.loadAnimationPath(animationPath: animationPath)) {
             throw AnimationLoadErrors.loadFromPathError
         }
+    }
+    
+    public func animationSize() -> CGSize {
+        dotLottiePlayer.animationSize()
     }
     
     public func loadAnimation(animationId: String, width: Int, height: Int) throws {
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-
-        // Allocate buffer and set render target BEFORE loading animation (only for software mode)
-        if renderMode == .software {
-            try allocateRenderBuffer()
-        }
-
-        if (!dotLottiePlayer.loadAnimation(animationId: animationId,
-                                           width: self.WIDTH,
-                                           height: self.HEIGHT)) {
+        
+        try allocateRenderBuffer()
+        
+        if (!dotLottiePlayer.loadAnimation(animationId: animationId)) {
             throw AnimationLoadErrors.loadFromPathError
         }
     }
@@ -276,14 +254,8 @@ class Player: ObservableObject {
     public func resize(width: Int, height: Int) throws {
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-
-        // Clear canvas, then reallocate buffer for new dimensions BEFORE calling resize
+        
         try allocateRenderBuffer(clearFirst: true)
-
-        if !dotLottiePlayer.resize(width: self.WIDTH, height: self.HEIGHT) {
-            throw PlayerErrors.resizeError
-        }
-
         hasResized = true
     }
     

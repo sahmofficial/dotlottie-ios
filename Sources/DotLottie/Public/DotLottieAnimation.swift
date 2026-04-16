@@ -6,7 +6,10 @@
 //
 
 import Foundation
+import CoreGraphics
+#if !os(watchOS)
 import CoreImage
+#endif
 
 #if os(iOS)
 import UIKit
@@ -200,7 +203,9 @@ public final class DotLottieAnimation: ObservableObject {
             print(errorMessage(error))
             animationModel.error = true
         }
+        #if !os(watchOS)
         animationModel.backgroundColor = config.backgroundColor ?? .clear
+        #endif
     }
     
     public func render() -> Bool {
@@ -393,13 +398,15 @@ public final class DotLottieAnimation: ObservableObject {
     }
     
     // MARK: Background color
+    #if !os(watchOS)
     public func setBackgroundColor(bgColor: CIImage) {
         self.animationModel.backgroundColor = bgColor
     }
-    
+
     public func backgroundColor() -> CIImage {
         return self.animationModel.backgroundColor
     }
+    #endif
     
     // MARK: Playback setters / getters
     

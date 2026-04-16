@@ -19,8 +19,6 @@ typedef struct dotlottieDotLottieConfig DotLottieConfig;
 #define DOTLOTTIE_SUCCESS 0
 
 
-#define dotlottieDEFAULT_BACKGROUND_COLOR 0
-
 #define dotlottieMAX_EVENTS 256
 
 typedef enum dotlottieDotLottieResult {
@@ -102,6 +100,8 @@ typedef struct dotlottieDotLottiePlayer dotlottieDotLottiePlayer;
  * will never hold a valid (non-null) pointer when the feature is disabled.
  */
 typedef struct dotlottieDotLottieStateMachine dotlottieDotLottieStateMachine;
+
+typedef struct dotlottieRgba dotlottieRgba;
 
 typedef struct dotlottieLayout {
   enum dotlottieFit fit;
@@ -268,6 +268,8 @@ typedef struct dotlottieStateMachineInternalEvent {
   const char *message;
 } dotlottieStateMachineInternalEvent;
 
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus
@@ -283,25 +285,17 @@ enum dotlottieDotLottieResult dotlottie_unload_font(const char *name);
 enum dotlottieDotLottieResult dotlottie_destroy(struct dotlottieDotLottiePlayer *ptr);
 
 enum dotlottieDotLottieResult dotlottie_load_animation_data(struct dotlottieDotLottiePlayer *ptr,
-                                                            const char *animation_data,
-                                                            uint32_t width,
-                                                            uint32_t height);
+                                                            const char *animation_data);
 
 enum dotlottieDotLottieResult dotlottie_load_animation_path(struct dotlottieDotLottiePlayer *ptr,
-                                                            const char *animation_path,
-                                                            uint32_t width,
-                                                            uint32_t height);
+                                                            const char *animation_path);
 
 enum dotlottieDotLottieResult dotlottie_load_animation(struct dotlottieDotLottiePlayer *ptr,
-                                                       const char *animation_id,
-                                                       uint32_t width,
-                                                       uint32_t height);
+                                                       const char *animation_id);
 
 enum dotlottieDotLottieResult dotlottie_load_dotlottie_data(struct dotlottieDotLottiePlayer *ptr,
                                                             const char *file_data,
-                                                            uintptr_t file_size,
-                                                            uint32_t width,
-                                                            uint32_t height);
+                                                            uintptr_t file_size);
 
 /**
  * Get the manifest as a JSON string.
@@ -340,8 +334,11 @@ enum dotlottieDotLottieResult dotlottie_set_autoplay(struct dotlottieDotLottiePl
 enum dotlottieDotLottieResult dotlottie_set_use_frame_interpolation(struct dotlottieDotLottiePlayer *ptr,
                                                                     bool enabled);
 
-enum dotlottieDotLottieResult dotlottie_set_background_color(struct dotlottieDotLottiePlayer *ptr,
-                                                             uint32_t color);
+enum dotlottieDotLottieResult dotlottie_set_background(struct dotlottieDotLottiePlayer *ptr,
+                                                       uint8_t r,
+                                                       uint8_t g,
+                                                       uint8_t b,
+                                                       uint8_t a);
 
 /**
  * Sets the playback segment for the animation.
@@ -451,16 +448,11 @@ bool dotlottie_get_autoplay(struct dotlottieDotLottiePlayer *ptr);
  */
 bool dotlottie_get_use_frame_interpolation(struct dotlottieDotLottiePlayer *ptr);
 
-/**
- * Returns the current background color.
- *
- * # Parameters
- * - `ptr`: Pointer to the DotLottiePlayer instance
- *
- * # Returns
- * The background color as ARGB u32, or 0 if the pointer is invalid
- */
-uint32_t dotlottie_get_background_color(struct dotlottieDotLottiePlayer *ptr);
+enum dotlottieDotLottieResult dotlottie_background(struct dotlottieDotLottiePlayer *ptr,
+                                                   uint8_t *r,
+                                                   uint8_t *g,
+                                                   uint8_t *b,
+                                                   uint8_t *a);
 
 /**
  * Returns the current segment.
@@ -540,6 +532,12 @@ enum dotlottieDotLottieResult dotlottie_pause(struct dotlottieDotLottiePlayer *p
 
 enum dotlottieDotLottieResult dotlottie_stop(struct dotlottieDotLottiePlayer *ptr);
 
+enum dotlottieDotLottieResult dotlottie_set_audio_volume(struct dotlottieDotLottiePlayer *ptr,
+                                                         float volume);
+
+enum dotlottieDotLottieResult dotlottie_audio_volume(struct dotlottieDotLottiePlayer *ptr,
+                                                     float *result);
+
 enum dotlottieDotLottieResult dotlottie_request_frame(struct dotlottieDotLottiePlayer *ptr,
                                                       float *result);
 
@@ -570,10 +568,6 @@ enum dotlottieDotLottieResult dotlottie_render(struct dotlottieDotLottiePlayer *
  */
 enum dotlottieDotLottieResult dotlottie_tick(struct dotlottieDotLottiePlayer *ptr);
 
-enum dotlottieDotLottieResult dotlottie_resize(struct dotlottieDotLottiePlayer *ptr,
-                                               uint32_t width,
-                                               uint32_t height);
-
 enum dotlottieDotLottieResult dotlottie_clear(struct dotlottieDotLottiePlayer *ptr);
 
 /**
@@ -602,6 +596,8 @@ enum dotlottieDotLottieResult dotlottie_set_sw_target(struct dotlottieDotLottieP
                                                       enum dotlottieColorSpace color_space);
 
 enum dotlottieDotLottieResult dotlottie_set_gl_target(struct dotlottieDotLottiePlayer *ptr,
+                                                      void *display,
+                                                      void *surface,
                                                       void *context,
                                                       int32_t id,
                                                       uint32_t width,
@@ -804,8 +800,8 @@ enum dotlottieDotLottieResult dotlottie_markers_count(struct dotlottieDotLottieP
  * - `ptr`: Pointer to the DotLottiePlayer instance
  * - `idx`: Index of the marker (0-based)
  * - `name`: Pointer to receive the marker name (library-owned, do not free)
- * - `time`: Pointer to receive the marker time (start frame), or NULL to skip
- * - `duration`: Pointer to receive the marker duration (in frames), or NULL to skip
+ * - `start`: Pointer to receive the marker start frame, or NULL to skip
+ * - `end`: Pointer to receive the marker end frame, or NULL to skip
  *
  * # Returns
  * - `DOTLOTTIE_SUCCESS` on success
@@ -814,8 +810,8 @@ enum dotlottieDotLottieResult dotlottie_markers_count(struct dotlottieDotLottieP
 enum dotlottieDotLottieResult dotlottie_marker(struct dotlottieDotLottiePlayer *ptr,
                                                uint32_t idx,
                                                const char **name,
-                                               float *time,
-                                               float *duration);
+                                               float *start,
+                                               float *end);
 
 /**
  * Returns the active animation ID.
@@ -856,9 +852,6 @@ enum dotlottieDotLottieResult dotlottie_set_viewport(struct dotlottieDotLottiePl
                                                      int32_t y,
                                                      int32_t w,
                                                      int32_t h);
-
-enum dotlottieDotLottieResult dotlottie_segment_duration(struct dotlottieDotLottiePlayer *ptr,
-                                                         float *result);
 
 enum dotlottieDotLottieResult dotlottie_animation_size(struct dotlottieDotLottiePlayer *ptr,
                                                        float *picture_width,
@@ -1148,60 +1141,16 @@ enum dotlottieDotLottieResult dotlottie_get_state_machine(struct dotlottieDotLot
                                                           uintptr_t *size_out);
 
 /**
- * Create WebGPU context from Metal layer (macOS/iOS only)
+ * Initialise the Android JVM context required by cpal/rodio for audio output.
+ *
+ * Must be called once before loading any animation that contains audio.
+ * Safe to call multiple times — subsequent calls are ignored by ndk-context.
  *
  * # Arguments
- * * `metal_layer` - Pointer to CAMetalLayer from Swift
- *
- * # Returns
- * * Opaque pointer to WgpuContext, or NULL on failure
- *
- * # Safety
- * The metal_layer pointer must be valid and point to a CAMetalLayer object
+ * * `vm`  - pointer to the `JavaVM` struct (cast from `JavaVM*`)
+ * * `ctx` - JNI global reference to an `android.content.Context` object
  */
-void *dotlottie_create_wgpu_context_from_metal_layer(void *metal_layer);
-
-/**
- * Get WebGPU pointers from context (device, instance, surface)
- *
- * # Arguments
- * * `context` - Opaque pointer from dotlottie_create_wgpu_context_from_metal_layer
- * * `out_device` - Output pointer for device
- * * `out_instance` - Output pointer for instance
- * * `out_surface` - Output pointer for surface
- *
- * # Safety
- * context must be a valid pointer from dotlottie_create_wgpu_context_from_metal_layer
- */
-void dotlottie_wgpu_context_get_pointers(const void *context,
-                                         uint64_t *out_device,
-                                         uint64_t *out_instance,
-                                         uint64_t *out_surface);
-
-/**
- * Free WebGPU context
- *
- * # Arguments
- * * `context` - Opaque pointer from dotlottie_create_wgpu_context_from_metal_layer
- *
- * # Safety
- * context must be a valid pointer and will be invalid after this call
- */
-void dotlottie_free_wgpu_context(void *context);
-
-/**
- * Present WebGPU surface to display rendered frame
- *
- * CRITICAL: Must be called after rendering to show the frame on screen.
- * Without this call, rendering happens off-screen but never displays.
- *
- * # Arguments
- * * `context` - Opaque pointer from dotlottie_create_wgpu_context_from_metal_layer
- *
- * # Safety
- * context must be a valid pointer from dotlottie_create_wgpu_context_from_metal_layer
- */
-void dotlottie_wgpu_context_present(const void *context);
+void dotlottie_init_android(void *vm, void *ctx);
 
 #ifdef __cplusplus
 }  // extern "C"

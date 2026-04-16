@@ -5,6 +5,7 @@
 //  Created by Sam on 03/11/2023.
 //
 
+#if !os(watchOS)
 import Foundation
 import MetalKit
 import AVFoundation
@@ -239,17 +240,18 @@ public class Coordinator: NSObject, MTKViewDelegate {
         // Animation dimensions are in pixels (drawable size)
         let animationWidth = CGFloat(self.parent.dotLottieViewModel.animationModel.width)
         let animationHeight = CGFloat(self.parent.dotLottieViewModel.animationModel.height)
-        
+
         // Calculate scale ratio: animation pixels / view points
         // Note: viewSize is in points, animation dimensions are in pixels
         let scaleRatio = CGPoint(
             x: animationWidth / self.viewSize.width,
             y: animationHeight / self.viewSize.height
         )
-        
+
 #if os(iOS)
-        let mappedX = location.x * scaleRatio.x * UIScreen.main.scale
-        let mappedY = location.y * scaleRatio.y * UIScreen.main.scale
+        let screenScale = UIScreen.main.scale
+        let mappedX = location.x * scaleRatio.x * screenScale
+        let mappedY = location.y * scaleRatio.y * screenScale
 #elseif os(macOS)
         // Flip Y coordinate for macOS (origin is bottom-left on macOS, top-left in animation space)
         let flippedY = self.viewSize.height - location.y
@@ -392,4 +394,5 @@ extension Coordinator: GestureManagerDelegate {
         postEvent(event)
     }
 }
-#endif
+#endif // os(macOS)
+#endif // !os(watchOS)

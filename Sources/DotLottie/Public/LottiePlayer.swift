@@ -1,4 +1,4 @@
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS) || os(visionOS)
 import UIKit
 import Metal
 import MetalKit
@@ -7,7 +7,7 @@ import Combine
 
 public typealias PlatformView = UIView
 public typealias PlatformColor = UIColor
-#elseif canImport(AppKit)
+#elseif os(macOS)
 import AppKit
 import Metal
 import MetalKit
@@ -18,7 +18,7 @@ public typealias PlatformView = NSView
 public typealias PlatformColor = NSColor
 #endif
 
-#if canImport(UIKit) || canImport(AppKit)
+#if os(iOS) || os(tvOS) || os(visionOS) || os(macOS)
 
 @IBDesignable
 open class DotLottiePlayerUIView: PlatformView {

@@ -390,7 +390,11 @@ public class DotLottiePlayer {
         dotlottie_set_speed(ptr, config.speed)
         dotlottie_set_use_frame_interpolation(ptr, config.useFrameInterpolation)
         dotlottie_set_autoplay(ptr, config.autoplay)
-        dotlottie_set_background_color(ptr, config.backgroundColor)
+        let bgR = UInt8((config.backgroundColor >> 16) & 0xFF)
+        let bgG = UInt8((config.backgroundColor >> 8) & 0xFF)
+        let bgB = UInt8(config.backgroundColor & 0xFF)
+        let bgA = UInt8((config.backgroundColor >> 24) & 0xFF)
+        dotlottie_set_background(ptr, bgR, bgG, bgB, bgA)
         let cLayout = config.layout.cLayout
         dotlottie_set_layout(ptr, cLayout)
 
@@ -439,31 +443,26 @@ public class DotLottiePlayer {
 
     // MARK: - Loading
 
-    public func loadAnimationData(animationData: String, width: UInt32, height: UInt32) -> Bool {
+    public func loadAnimationData(animationData: String) -> Bool {
         guard let ptr = playerPtr else { return false }
-        // Copy to a mutable heap buffer first.
-        var mutableBytes = [CChar](animationData.utf8CString)
-        return mutableBytes.withUnsafeMutableBufferPointer { buffer in
-            guard let base = buffer.baseAddress else { return false }
-            return dotlottie_load_animation_data(ptr, base, width, height) == Success
-        }
+        return animationData.withCString { dotlottie_load_animation_data(ptr, $0) == Success }
     }
 
-    public func loadAnimationPath(animationPath: String, width: UInt32, height: UInt32) -> Bool {
+    public func loadAnimationPath(animationPath: String) -> Bool {
         guard let ptr = playerPtr else { return false }
-        return animationPath.withCString { dotlottie_load_animation_path(ptr, $0, width, height) == Success }
+        return animationPath.withCString { dotlottie_load_animation_path(ptr, $0) == Success }
     }
 
-    public func loadAnimation(animationId: String, width: UInt32, height: UInt32) -> Bool {
+    public func loadAnimation(animationId: String) -> Bool {
         guard let ptr = playerPtr else { return false }
-        return animationId.withCString { dotlottie_load_animation(ptr, $0, width, height) == Success }
+        return animationId.withCString { dotlottie_load_animation(ptr, $0) == Success }
     }
 
-    public func loadDotlottieData(fileData: Data, width: UInt32, height: UInt32) -> Bool {
+    public func loadDotlottieData(fileData: Data) -> Bool {
         guard let ptr = playerPtr else { return false }
-        return fileData.withUnsafeBytes { bufferPtr in
+        return fileData.withUnsafeBytes { (bufferPtr: UnsafeRawBufferPointer) in
             guard let base = bufferPtr.baseAddress else { return false }
-            return dotlottie_load_dotlottie_data(ptr, base.assumingMemoryBound(to: CChar.self), UInt(fileData.count), width, height) == Success
+            return dotlottie_load_dotlottie_data(ptr, base.assumingMemoryBound(to: CChar.self), UInt(bufferPtr.count)) == Success
         }
     }
 
@@ -497,6 +496,15 @@ public class DotLottiePlayer {
     public func setFrame(no: Float) -> Bool {
         guard let ptr = playerPtr else { return false }
         return dotlottie_set_frame(ptr, no) == Success
+    }
+    
+    public func animationSize() -> CGSize {
+        guard let ptr = playerPtr else { return CGSize(width: 0, height: 0)}
+        var resultW: Float = 0
+        var resultH: Float = 0
+        
+        dotlottie_animation_size(ptr, &resultW, &resultH);
+        return CGSize(width: Double(resultW), height: Double(resultH))
     }
 
     public func seek(frame: Float) -> Bool {
@@ -555,13 +563,6 @@ public class DotLottiePlayer {
         return result
     }
 
-    public func segmentDuration() -> Float {
-        guard let ptr = playerPtr else { return 0 }
-        var result: Float = 0
-        dotlottie_segment_duration(ptr, &result)
-        return result
-    }
-
     /// Current loop iteration count during playback.
     public func currentLoopCount() -> UInt32 {
         guard let ptr = playerPtr else { return 0 }
@@ -613,7 +614,9 @@ public class DotLottiePlayer {
 
     public func getBackgroundColor() -> UInt32 {
         guard let ptr = playerPtr else { return 0 }
-        return dotlottie_get_background_color(ptr)
+        var r: UInt8 = 0, g: UInt8 = 0, b: UInt8 = 0, a: UInt8 = 0
+        dotlottie_background(ptr, &r, &g, &b, &a)
+        return (UInt32(a) << 24) | (UInt32(r) << 16) | (UInt32(g) << 8) | UInt32(b)
     }
 
     public func getSegment() -> [Float]? {
@@ -677,7 +680,11 @@ public class DotLottiePlayer {
     @discardableResult
     public func setBackgroundColor(_ color: UInt32) -> Bool {
         guard let ptr = playerPtr else { return false }
-        return dotlottie_set_background_color(ptr, color) == Success
+        let r = UInt8((color >> 16) & 0xFF)
+        let g = UInt8((color >> 8) & 0xFF)
+        let b = UInt8(color & 0xFF)
+        let a = UInt8((color >> 24) & 0xFF)
+        return dotlottie_set_background(ptr, r, g, b, a) == Success
     }
 
     @discardableResult
@@ -718,13 +725,6 @@ public class DotLottiePlayer {
         applyConfig(config)
     }
 
-    // MARK: - Resize
-
-    public func resize(width: UInt32, height: UInt32) -> Bool {
-        guard let ptr = playerPtr else { return false }
-        return dotlottie_resize(ptr, width, height) == Success
-    }
-
     public func clear() {
         guard let ptr = playerPtr else { return }
         dotlottie_clear(ptr)
@@ -743,13 +743,15 @@ public class DotLottiePlayer {
     }
 
     public func setGLTarget(
-        context: UnsafeMutableRawPointer,
+        display: UnsafeMutableRawPointer?,
+        surface: UnsafeMutableRawPointer?,
+        context: UnsafeMutableRawPointer?,
         id: Int32,
         width: UInt32,
         height: UInt32
     ) -> Bool {
         guard let ptr = playerPtr else { return false }
-        return dotlottie_set_gl_target(ptr, context, id, width, height) == Success
+        return dotlottie_set_gl_target(ptr, display, surface, context, id, width, height) == Success
     }
 
     public func setWebGPUTarget(

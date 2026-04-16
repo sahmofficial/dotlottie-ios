@@ -6,7 +6,9 @@
 //
 
 import Foundation
+#if !os(watchOS)
 import CoreImage
+#endif
 
 public enum PlayerState {
     case playing
@@ -23,12 +25,14 @@ public enum PlayerState {
 
 public struct AnimationModel {
     public var width: Int = 512
-    
+
     public var height: Int = 512
 
     public var error: Bool = false
-    
+
     public var errorMessage: String = ""
-    
+
+    #if !os(watchOS)
     public var backgroundColor: CIImage = CIImage.clear
+    #endif
 }
