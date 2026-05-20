@@ -1,10 +1,12 @@
-# @lottiefiles/dotLottie-ios
-
-### iOS player for .lottie and .json files.
-
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/23125742/201124166-c2a0bc2a-018b-463b-b291-944fb767b5c2.png" />
+  <img
+    src="https://lottie.host/0c16cf7c-dd59-4926-9fd2-77e767b5bb13/Rxmlzk25G1.svg"
+    alt="dotLottie iOS"
+    width="550"
+  />
 </p>
+
+<h1 align="center">dotLottie iOS</h1>
 
 ## Supported Devices
 
