@@ -21,6 +21,7 @@ enum PlayerErrors: Error {
     case playError
     case bufferAllocationError
     case rendererConfigurationError
+    case invalidRenderSize
 }
 
 enum FileErrors : Error {

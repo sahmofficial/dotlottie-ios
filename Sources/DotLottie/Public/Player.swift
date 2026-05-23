@@ -34,33 +34,39 @@ class Player: ObservableObject {
     }
     
     public func loadAnimationData(animationData: String, width: Int, height: Int) throws {
+        try assertValidRenderSize(width: width, height: height)
+
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-        
+
         try allocateRenderBuffer()
-        
+
         if (!dotLottiePlayer.loadAnimationData(animationData: animationData)) {
             throw AnimationLoadErrors.loadAnimationDataError
         }
     }
-    
+
     func loadDotlottieData(data: Data, width: Int, height: Int) throws {
+        try assertValidRenderSize(width: width, height: height)
+
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-        
+
         try allocateRenderBuffer()
-        
+
         if (!dotLottiePlayer.loadDotlottieData(fileData: data)) {
             throw AnimationLoadErrors.loadAnimationDataError
         }
     }
-    
+
     public func loadAnimationPath(animationPath: String, width: Int, height: Int) throws {
+        try assertValidRenderSize(width: width, height: height)
+
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-        
+
         try allocateRenderBuffer()
-        
+
         if (!dotLottiePlayer.loadAnimationPath(animationPath: animationPath)) {
             throw AnimationLoadErrors.loadFromPathError
         }
@@ -71,11 +77,13 @@ class Player: ObservableObject {
     }
     
     public func loadAnimation(animationId: String, width: Int, height: Int) throws {
+        try assertValidRenderSize(width: width, height: height)
+
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
-        
+
         try allocateRenderBuffer()
-        
+
         if (!dotLottiePlayer.loadAnimation(animationId: animationId)) {
             throw AnimationLoadErrors.loadFromPathError
         }
@@ -247,11 +255,19 @@ class Player: ObservableObject {
     }
     
     public func resize(width: Int, height: Int) throws {
+        try assertValidRenderSize(width: width, height: height)
+
         self.WIDTH = UInt32(width)
         self.HEIGHT = UInt32(height)
 
         try allocateRenderBuffer()
         hasResized = true
+    }
+
+    private func assertValidRenderSize(width: Int, height: Int) throws {
+        guard width > 0, height > 0 else {
+            throw PlayerErrors.invalidRenderSize
+        }
     }
     
     public func isStateMachineRunning() -> Bool {
