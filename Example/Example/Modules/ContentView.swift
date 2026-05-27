@@ -14,34 +14,49 @@ struct ContentView: View {
             List {
                 Section(header: Text("Original DotLottie Examples")) {
                     NavigationLink("Basic Example") {
-                        OriginalExampleView()
+//                        OriginalExampleView()
                     }
                 }
                 
                 Section(header: Text("New LottieAnimationView-Style API")) {
 #if canImport(UIKit)
                     NavigationLink("UIKit Example (DotLottiePlayerUIView)") {
-                        UIKitExampleViewWrapper()
+//                        UIKitExampleViewWrapper()
                     }
 #endif
                     
                     NavigationLink("SwiftUI Example (DotLottiePlayerView)") {
-                        SwiftUIExampleView()
+//                        SwiftUIExampleView()
                     }
                 }
                 
+                Section(header: Text("Carousel")) {
+                    NavigationLink("Animation Carousel") {
+//                        Example8_Carousel()
+                    }
+                }
+
                 Section(header: Text("State Machine & Interactivity")) {
                     NavigationLink("SwiftUI State Machine Example") {
-                        Example7_StateMachine()
+//                        Example7_StateMachine()
                     }
                     
 #if canImport(UIKit)
                     NavigationLink("UIKit State Machine Example") {
-                        UIKitStateMachineViewWrapper()
+//                        UIKitStateMachineViewWrapper()
                     }
 #endif
                 }
                 
+                Section(header: Text("WebGPU Renderer")) {
+#if os(iOS) || os(macOS)
+                    NavigationLink("WebGPU Example") {
+                        ScrollView { Example9_WebGPU() }
+                            .navigationTitle("WebGPU Renderer")
+                    }
+#endif
+                }
+
                 Section(header: Text("About")) {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("DotLottie iOS Test App")

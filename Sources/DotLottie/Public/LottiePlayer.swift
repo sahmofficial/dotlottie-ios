@@ -384,7 +384,6 @@ open class DotLottiePlayerUIView: PlatformView {
             }
         
         loadingObserver = timerCancellable
-        cancellables.insert(timerCancellable)
     }
     
     private func updateConfig() {
