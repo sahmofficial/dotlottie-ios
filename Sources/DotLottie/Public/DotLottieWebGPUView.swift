@@ -214,9 +214,18 @@ public class DotLottieWebGPUView: PlatformBase {
         let dt = lastTickTime == 0 ? 0.0 : Float((now - lastTickTime) * 1000.0)
         lastTickTime = now
 
-        if bridge.tick(dt: dt) {
-            if let ctx = wgpuContext {
-                DotLottiePlayer.presentWebGPUSurface(context: ctx)
+        // Wrap render+present in an explicit autorelease pool so that wgpu-native's
+        // "(wgpu internal) Signal" MTLCommandBuffers — created by every wgpuQueueSubmit
+        // for GPU completion tracking — are released before the next frame's submit
+        // tries to recycle their associated Staging buffers.  Without this, Metal
+        // Debug fires -[MTLDebugDevice notifyExternalReferencesNonZeroOnDealloc:]
+        // because the Signal ObjC object (in the run-loop pool) still holds a Metal
+        // retain on the Staging buffer when wgpu recycles it.
+        autoreleasepool {
+            if bridge.tick(dt: dt) {
+                if let ctx = wgpuContext {
+                    DotLottiePlayer.presentWebGPUSurface(context: ctx)
+                }
             }
         }
     }

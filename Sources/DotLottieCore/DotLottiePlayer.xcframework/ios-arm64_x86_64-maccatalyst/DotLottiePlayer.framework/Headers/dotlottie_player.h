@@ -1183,6 +1183,10 @@ void dotlottie_free_wgpu_context(void *context);
  */
 void dotlottie_wgpu_context_present(const void *context);
 
+extern void *objc_autoreleasePoolPush(void);
+
+extern void objc_autoreleasePoolPop(void *pool);
+
 #ifdef __cplusplus
 }  // extern "C"
 #endif  // __cplusplus
