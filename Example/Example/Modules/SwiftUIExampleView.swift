@@ -33,6 +33,8 @@ struct SwiftUIExampleView: View {
                 
                 Example6_MultipleAnimations()
 
+                Example8_URLLoading()
+
                 if showInfo {
                     AnimationInfoView(
                         animation: DotLottieAnimation(
