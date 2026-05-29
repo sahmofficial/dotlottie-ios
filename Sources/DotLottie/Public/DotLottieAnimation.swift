@@ -52,7 +52,13 @@ public final class DotLottieAnimation: ObservableObject {
 
     private var cachedStateMachineInputs: [String: String] = [:]
 
-    private var currFrame = 0;
+    private var currFrame = 0
+
+    private var loadingTask: Task<Void, Never>?
+
+    deinit {
+        loadingTask?.cancel()
+    }
 
     /// Load directly from a String (.json).
     public convenience init(
@@ -87,14 +93,40 @@ public final class DotLottieAnimation: ObservableObject {
         config: AnimationConfig,
         threads: Int? = nil
     ) {
-        self.init(config: config, threads: threads) {
-            if webURL.contains(".lottie") {
-                try await $0.loadDotLottieFromURL(url: webURL)
-            } else {
-                try await $0.loadAnimationFromURL(url: webURL)
-            }
-        } errorMessage: { error in
+        self.init(config: config, threads: threads, task: { _ in }, errorMessage: { error in
             "Failed to load dotLottie. Failed with error: \(error)"
+        })
+        let urlString = webURL
+        loadingTask = Task { [weak self] in
+            let data: Data
+            do {
+                guard let url = URL(string: urlString) else { return }
+                data = try await fetchFileFromURL(url: url)
+            } catch {
+                await MainActor.run { [weak self] in
+                    self?.animationModel.error = true
+                    self?.animationModel.errorMessage = error.localizedDescription
+                }
+                return
+            }
+
+            guard !Task.isCancelled else { return }
+
+            await MainActor.run { [weak self] in
+                guard let self else { return }
+                do {
+                    if urlString.contains(".lottie") {
+                        try self.loadDotLottie(data: data)
+                    } else {
+                        let dataAsString = String(decoding: data, as: UTF8.self)
+                        guard !dataAsString.isEmpty else { return }
+                        try self.loadAnimation(animationData: dataAsString)
+                    }
+                } catch {
+                    self.animationModel.error = true
+                    self.animationModel.errorMessage = error.localizedDescription
+                }
+            }
         }
     }
     
@@ -281,25 +313,6 @@ public final class DotLottieAnimation: ObservableObject {
         }
     }
     
-    /// Fetches the animation from a web URL, writes the animations and assets
-    /// to disk then passes the file path to loadAnimation.
-    /// - Parameter url: Web URL pointing to a .lottie file.
-    /// - Returns: Path on disk to animation.
-    private func loadDotLottieFromURL(url: String) async throws {
-        if let url = URL(string: url) {
-            do {
-                let data = try await fetchFileFromURL(url: url)
-                
-                try self.loadDotLottie(data: data)
-            } catch let error {
-                self.animationModel.errorMessage = error.localizedDescription
-                self.animationModel.error = true
-                
-                throw error
-            }
-        }
-    }
-    
     /// Loads animations (.json + .lottie) from the main bundle.
     /// - Parameters:
     ///   - animationName: Name of the animation inside the bundle.
@@ -322,31 +335,6 @@ public final class DotLottieAnimation: ObservableObject {
                 
                 throw error
             }
-        }
-    }
-    
-    /// Loads animation (.json) from a web URL.
-    /// - Parameter url: web URL pointing to an animation.
-    private func loadAnimationFromURL(url: String) async throws {
-        do {
-            if let url = URL(string: url) {
-                let data = try await fetchFileFromURL(url: url)
-                
-                let dataAsString = String(decoding: data, as: UTF8.self)
-                
-                if dataAsString != "" {
-                    try self.loadAnimation(animationData: dataAsString)
-                } else {
-                    throw AnimationLoadErrors.convertToStringError
-                }
-            } else {
-                throw NetworkingErrors.invalidURL
-            }
-        } catch let error {
-            self.animationModel.errorMessage = error.localizedDescription
-            self.animationModel.error = true
-            
-            throw error
         }
     }
     

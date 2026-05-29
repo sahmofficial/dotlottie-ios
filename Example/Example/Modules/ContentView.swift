@@ -30,6 +30,21 @@ struct ContentView: View {
                     }
                 }
                 
+                Section(header: Text("URL Loading")) {
+                    NavigationLink("Load from URL") {
+                        ScrollView {
+                            VStack(spacing: 24) {
+                                Text("URL Loading")
+                                    .font(.headline)
+                                    .padding(.top)
+                                Example8_URLLoading()
+                                Spacer(minLength: 24)
+                            }
+                        }
+                        .navigationTitle("URL Loading")
+                    }
+                }
+
                 Section(header: Text("State Machine & Interactivity")) {
                     NavigationLink("SwiftUI State Machine Example") {
                         Example7_StateMachine()
