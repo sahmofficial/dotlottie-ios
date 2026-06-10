@@ -14,36 +14,30 @@ struct ContentView: View {
             List {
                 Section(header: Text("Original DotLottie Examples")) {
                     NavigationLink("Basic Example") {
-//                        OriginalExampleView()
+                        OriginalExampleView()
                     }
                 }
                 
                 Section(header: Text("New LottieAnimationView-Style API")) {
 #if canImport(UIKit)
                     NavigationLink("UIKit Example (DotLottiePlayerUIView)") {
-//                        UIKitExampleViewWrapper()
+                        UIKitExampleViewWrapper()
                     }
 #endif
                     
                     NavigationLink("SwiftUI Example (DotLottiePlayerView)") {
-//                        SwiftUIExampleView()
+                        SwiftUIExampleView()
                     }
                 }
                 
-                Section(header: Text("Carousel")) {
-                    NavigationLink("Animation Carousel") {
-//                        Example8_Carousel()
-                    }
-                }
-
                 Section(header: Text("State Machine & Interactivity")) {
                     NavigationLink("SwiftUI State Machine Example") {
-//                        Example7_StateMachine()
+                        Example7_StateMachine()
                     }
                     
 #if canImport(UIKit)
                     NavigationLink("UIKit State Machine Example") {
-//                        UIKitStateMachineViewWrapper()
+                        UIKitStateMachineViewWrapper()
                     }
 #endif
                 }
@@ -53,6 +47,18 @@ struct ContentView: View {
                     NavigationLink("WebGPU Example") {
                         ScrollView { Example9_WebGPU() }
                             .navigationTitle("WebGPU Renderer")
+                    }
+#endif
+                }
+
+                Section(header: Text("Performance & Benchmarking")) {
+#if os(iOS) || os(macOS)
+                    NavigationLink("4K Stress Test (CPU vs WebGPU)") {
+                        Example10_StressTest()
+                    }
+
+                    NavigationLink("Many Animations (CPU vs WebGPU)") {
+                        Example11_ManyAnimations()
                     }
 #endif
                 }

@@ -3,6 +3,8 @@ import DotLottie
 
 #if os(iOS) || os(macOS)
 struct Example9_WebGPU: View {
+    @State private var gpuView: DotLottieWebGPUView?
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Example 9: WebGPU Renderer")
@@ -10,9 +12,12 @@ struct Example9_WebGPU: View {
                 .foregroundColor(.secondary)
 
             DotLottieWebGPUPlayerView(
-                fileName: "confettiSRFK2025",
-                config: Config(autoplay: true, loopAnimation: true)
+                fileName: "BrandToggle",
+                config: Config(stateMachineId: "StateMachine1")
             )
+            { view in
+                gpuView = view
+            }
             .frame(height: 300)
             .background(Color.black.opacity(0.05))
             .cornerRadius(12)

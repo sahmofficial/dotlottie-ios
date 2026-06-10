@@ -162,6 +162,7 @@ public class Coordinator: NSObject, MTKViewDelegate {
         self.viewSize = size
 #endif
         if (!self.parent.dotLottieViewModel.sizeOverrideActive) {
+            print("Setting size to view size: \(size.width) \(size.height)")
             self.parent.dotLottieViewModel.resize(width: Int(size.width), height: Int(size.height))
         }
         

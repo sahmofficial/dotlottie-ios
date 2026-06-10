@@ -964,7 +964,7 @@ open class DotLottiePlayerUIView: PlatformView {
     }
 }
 
-#if canImport(UIKit)
+#if os(iOS)
 extension DotLottiePlayerUIView: UIGestureRecognizerDelegate, GestureManagerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
@@ -1020,7 +1020,7 @@ extension DotLottiePlayerUIView: UIGestureRecognizerDelegate, GestureManagerDele
 }
 #endif
 
-#if canImport(AppKit)
+#if os(macOS)
 extension DotLottiePlayerUIView: GestureManagerDelegate {
     func gestureManagerDidRecognizeTap(_ gestureManager: GestureManager, at location: CGPoint) {
         let mapped = mapCoordinatesToAnimation(location)

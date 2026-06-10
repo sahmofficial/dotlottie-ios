@@ -1,4 +1,4 @@
-#if os(iOS) || os(macOS)
+#if (os(iOS) && !targetEnvironment(macCatalyst)) || os(macOS)
 
 #if os(iOS)
 import UIKit
@@ -28,11 +28,13 @@ public class DotLottieWebGPUView: PlatformBase {
 
     private let bridge: DotLottiePlayer
 
-    /// Opaque pointer to the native WgpuContext (instance/adapter/device/queue/surface).
-    private var wgpuContext: UnsafeMutableRawPointer?
+    /// The config the view was created with. Retained so a state machine named in
+    /// `config.stateMachineId` can be auto-started after load, mirroring the
+    /// software-rendering path (`DotLottieAnimation.loadDotLottie`).
+    private let config: Config
 
-    /// Cached raw wgpu pointers — held so resize doesn't recreate the whole context.
-    private var wgpuPointers: (device: UInt64, instance: UInt64, surface: UInt64)?
+    /// The WebGPU context (instance/adapter/device/queue/surface) bound to the layer.
+    private var wgpuContext: WgpuContext?
 
     /// The physical drawable size that was last passed to `setWebGPUTarget`.
     private var configuredSize: CGSize = .zero
@@ -49,8 +51,15 @@ public class DotLottieWebGPUView: PlatformBase {
 
 #if os(iOS)
     private var displayLink: CADisplayLink?
+    /// Custom recognizer that feeds touches to the state machine (same one the
+    /// software-rendering path uses), so tap-vs-drag and double-tap behaviour match.
+    private var gestureManager: GestureManager?
 #elseif os(macOS)
     private var displayTimer: DispatchSourceTimer?
+    /// Mouse-event router for the state machine (shared with the software path).
+    private var gestureManager: GestureManager?
+    /// Tracking area for mouseMoved/Entered/Exited (hover → pointerEnter/Exit).
+    private var mouseTrackingArea: NSTrackingArea?
 #endif
 
     // MARK: - Metal layer accessor
@@ -76,9 +85,11 @@ public class DotLottieWebGPUView: PlatformBase {
     // MARK: - Init
 
     public init(config: Config = Config()) {
+        self.config = config
         bridge = DotLottiePlayer(config: config)
         super.init(frame: .zero)
         setupMetalLayer()
+        setupGestures()
         startDisplayLink()
     }
 
@@ -135,36 +146,30 @@ public class DotLottieWebGPUView: PlatformBase {
         if wgpuContext == nil {
             // First layout: create the wgpu context from the CAMetalLayer.
             // MUST be on the main thread (Metal requirement).
-            let layerPtr = Unmanaged.passUnretained(metalLayer).toOpaque()
-            guard let ctx = DotLottiePlayer.createWebGPUContext(metalLayer: layerPtr) else {
+            guard let ctx = WgpuContext(metalLayer: metalLayer) else {
                 print("[DotLottieWebGPUView] Failed to create WebGPU context")
                 return
             }
-            guard let ptrs = DotLottiePlayer.getWebGPUPointers(context: ctx) else {
-                DotLottiePlayer.freeWebGPUContext(context: ctx)
-                return
-            }
             wgpuContext = ctx
-            wgpuPointers = ptrs
             metalLayer.drawableSize = physical
             configuredSize = physical
         } else if physical != configuredSize {
-            // Resize: update drawable size; reconfigure ThorVG's wg canvas below.
+            // Resize: drain in-flight GPU work before ThorVG releases its render
+            // targets and reconfigures the surface, otherwise a Staging buffer can
+            // be freed while a pending Signal command buffer still references it
+            // (Metal: notifyExternalReferencesNonZeroOnDealloc).
+            wgpuContext?.waitUntilIdle()
             metalLayer.drawableSize = physical
             configuredSize = physical
         } else {
             return
         }
 
-        guard let ptrs = wgpuPointers else { return }
-        let device   = UnsafeMutableRawPointer(bitPattern: UInt(ptrs.device))
-        let instance = UnsafeMutableRawPointer(bitPattern: UInt(ptrs.instance))
-        let surface  = UnsafeMutableRawPointer(bitPattern: UInt(ptrs.surface))
-
+        guard let ctx = wgpuContext else { return }
         _ = bridge.setWebGPUTarget(
-            device: device,
-            instance: instance,
-            target: surface,
+            device: ctx.devicePtr,
+            instance: ctx.instancePtr,
+            target: ctx.surfacePtr,
             width: w,
             height: h
         )
@@ -221,16 +226,99 @@ public class DotLottieWebGPUView: PlatformBase {
         // Debug fires -[MTLDebugDevice notifyExternalReferencesNonZeroOnDealloc:]
         // because the Signal ObjC object (in the run-loop pool) still holds a Metal
         // retain on the Staging buffer when wgpu recycles it.
+        // Opt-in render-time measurement (no overhead unless a probe is attached).
+        var rendered = false
+
         autoreleasepool {
             if bridge.tick(dt: dt) {
-                if let ctx = wgpuContext {
-                    DotLottiePlayer.presentWebGPUSurface(context: ctx)
-                }
+                wgpuContext?.present()
+                rendered = true
             }
         }
     }
 
+    // MARK: - Gesture handling (state machine input)
+
+    private func setupGestures() {
+#if os(iOS)
+        isUserInteractionEnabled = true
+        let gm = GestureManager()
+        gm.gestureManagerDelegate = self
+        addGestureRecognizer(gm)
+        gestureManager = gm
+#elseif os(macOS)
+        let gm = GestureManager()
+        gm.gestureManagerDelegate = self
+        gestureManager = gm
+#endif
+    }
+
+#if os(macOS)
+    override public func updateTrackingAreas() {
+        super.updateTrackingAreas()
+        if let area = mouseTrackingArea { removeTrackingArea(area) }
+        let area = NSTrackingArea(
+            rect: bounds,
+            options: [.mouseMoved, .mouseEnteredAndExited, .activeInKeyWindow, .inVisibleRect],
+            owner: self,
+            userInfo: nil
+        )
+        addTrackingArea(area)
+        mouseTrackingArea = area
+    }
+
+    private func locationInView(_ event: NSEvent) -> CGPoint {
+        convert(event.locationInWindow, from: nil)
+    }
+
+    override public func mouseDown(with event: NSEvent)    { gestureManager?.handleMouseDown(at: locationInView(event)) }
+    override public func mouseDragged(with event: NSEvent) { gestureManager?.handleMouseDragged(at: locationInView(event)) }
+    override public func mouseUp(with event: NSEvent)      { gestureManager?.handleMouseUp(at: locationInView(event)) }
+    override public func mouseMoved(with event: NSEvent)   { gestureManager?.handleMouseMoved(at: locationInView(event)) }
+    override public func mouseEntered(with event: NSEvent) { gestureManager?.handleMouseEntered(at: locationInView(event)) }
+    override public func mouseExited(with event: NSEvent)  { gestureManager?.handleMouseExited(at: locationInView(event)) }
+#endif
+
+    /// Post a state-machine pointer event, mapping the gesture (in view points) to
+    /// the running state machine. No-op when no state machine is running.
+    private func postPointerEvent(_ makeEvent: (_ x: Float, _ y: Float) -> Event, at location: CGPoint) {
+        guard bridge.isStateMachineRunning else { return }
+        let mapped = mapCoordinatesToAnimation(location)
+        bridge.stateMachinePostEvent(event: makeEvent(Float(mapped.x), Float(mapped.y)))
+    }
+
+    /// Maps a view-space point (in points) to the WebGPU render target's pixel
+    /// space, which is the coordinate space the state machine hit-tests in.
+    ///
+    /// Unlike the software renderer (which loads at a fixed pixel size and maps to
+    /// that), the WebGPU path renders straight into the surface, whose size is the
+    /// physical drawable size we set via `setWebGPUTarget` (`bounds × displayScale`,
+    /// stored in `configuredSize`). So we map view points to that surface space.
+    /// On macOS the Y axis is flipped (AppKit origin is bottom-left, surface is
+    /// top-left), matching the software path.
+    private func mapCoordinatesToAnimation(_ point: CGPoint) -> CGPoint {
+        guard bounds.width > 0, bounds.height > 0 else { return point }
+
+        let target = configuredSize == .zero
+            ? CGSize(width: bounds.width * displayScale, height: bounds.height * displayScale)
+            : configuredSize
+        let scaleX = target.width / bounds.width
+        let scaleY = target.height / bounds.height
+
+#if os(iOS)
+        return CGPoint(x: point.x * scaleX, y: point.y * scaleY)
+#elseif os(macOS)
+        let flippedY = bounds.height - point.y
+        return CGPoint(x: point.x * scaleX, y: flippedY * scaleY)
+#endif
+    }
+
     // MARK: - Public API
+
+    /// Direct access to the underlying player, exposing the full
+    /// state-machine / playback API (`stateMachineSetNumericInput`, `seek`, etc.)
+    /// without mirroring every method on this view.
+    public var player: DotLottiePlayer { bridge }
 
     /// Load a .json or .lottie file from the given bundle.
     /// If the WebGPU canvas is not yet ready (no layout pass), loading is deferred
@@ -251,11 +339,11 @@ public class DotLottieWebGPUView: PlatformBase {
     private func loadAnimationImmediate(fileName: String, bundle: Bundle) -> Bool {
         if let url = bundle.url(forResource: fileName, withExtension: "json"),
            let data = try? String(contentsOf: url) {
-            return bridge.loadAnimationData(animationData: data)
+            return finishLoad(bridge.loadAnimationData(animationData: data))
         }
         if let url = bundle.url(forResource: fileName, withExtension: "lottie"),
            let data = try? Data(contentsOf: url) {
-            return bridge.loadDotlottieData(fileData: data)
+            return finishLoad(bridge.loadDotlottieData(fileData: data))
         }
         return false
     }
@@ -264,24 +352,57 @@ public class DotLottieWebGPUView: PlatformBase {
     public func loadAnimationData(_ animationData: String) -> Bool {
         reconfigureWebGPUIfNeeded()
         if wgpuContext != nil {
-            return bridge.loadAnimationData(animationData: animationData)
+            return loadAnimationDataImmediate(animationData)
         }
         pendingLoad = { [weak self] in
-            self?.bridge.loadAnimationData(animationData: animationData) ?? false
+            self?.loadAnimationDataImmediate(animationData) ?? false
         }
         return true
+    }
+
+    private func loadAnimationDataImmediate(_ animationData: String) -> Bool {
+        finishLoad(bridge.loadAnimationData(animationData: animationData))
     }
 
     @discardableResult
     public func loadDotlottie(data: Data) -> Bool {
         reconfigureWebGPUIfNeeded()
         if wgpuContext != nil {
-            return bridge.loadDotlottieData(fileData: data)
+            return loadDotlottieImmediate(data)
         }
         pendingLoad = { [weak self, data] in
-            self?.bridge.loadDotlottieData(fileData: data) ?? false
+            self?.loadDotlottieImmediate(data) ?? false
         }
         return true
+    }
+
+    private func loadDotlottieImmediate(_ data: Data) -> Bool {
+        finishLoad(bridge.loadDotlottieData(fileData: data))
+    }
+
+    /// Common post-load work: auto-start a state machine named in the config, then
+    /// draw the first frame so something is visible even when `autoplay` is false
+    /// (the display link only presents while the animation is advancing).
+    @discardableResult
+    private func finishLoad(_ ok: Bool) -> Bool {
+        guard ok else { return false }
+        if !config.stateMachineId.isEmpty {
+            _ = bridge.stateMachineLoad(stateMachineId: config.stateMachineId)
+            _ = bridge.stateMachineStart()
+        }
+        renderCurrentFrame()
+        return true
+    }
+
+    /// Render the current frame once and present it. Used to show the initial
+    /// frame after load when the animation is not playing.
+    private func renderCurrentFrame() {
+        guard wgpuContext != nil else { return }
+        autoreleasepool {
+            if bridge.render() {
+                wgpuContext?.present()
+            }
+        }
     }
 
     @discardableResult public func play()  -> Bool { bridge.play() }
@@ -295,23 +416,82 @@ public class DotLottieWebGPUView: PlatformBase {
     public func subscribe(observer: Observer)   { bridge.subscribe(observer: observer) }
     public func unsubscribe(observer: Observer) { bridge.unsubscribe(observer: observer) }
 
+    // MARK: - State machine
+
+    @discardableResult
+    public func stateMachineLoad(id: String) -> Bool { bridge.stateMachineLoad(stateMachineId: id) }
+
+    @discardableResult
+    public func stateMachineLoadData(_ data: String) -> Bool { bridge.stateMachineLoadData(stateMachine: data) }
+
+    @discardableResult
+    public func stateMachineStart(openUrlPolicy: OpenUrlPolicy = OpenUrlPolicy()) -> Bool {
+        bridge.stateMachineStart(openUrlPolicy: openUrlPolicy)
+    }
+
+    @discardableResult
+    public func stateMachineStop() -> Bool { bridge.stateMachineStop() }
+
+    @discardableResult
+    public func stateMachineSubscribe(observer: StateMachineObserver) -> Bool {
+        bridge.stateMachineSubscribe(observer: observer)
+    }
+
+    @discardableResult
+    public func stateMachineUnsubscribe(observer: StateMachineObserver) -> Bool {
+        bridge.stateMachineUnsubscribe(observer: observer)
+    }
+
     // MARK: - Deinit
 
     deinit {
         stopDisplayLink()
         if let ctx = wgpuContext {
+            // Drain in-flight GPU work before releasing anything, so no pending
+            // Signal command buffer outlives the Staging buffers it references.
+            ctx.waitUntilIdle()
+
             // Tell ThorVG to release its GPU resources first. ThorVG stores the
             // wgpu device/surface as raw unowned pointers, so its destructor would
             // use them after we've freed them. Passing nil triggers WgRenderer::release()
             // which zeroes out mContext.queue — ThorVG's destructor then exits early.
             _ = bridge.setWebGPUTarget(device: nil, instance: nil, target: nil, width: 0, height: 0)
 
-            // freeWebGPUContext drains the GPU queue (waits for all in-flight Metal
-            // command buffers to complete) before releasing the device and its
-            // internal staging buffers.
-            DotLottiePlayer.freeWebGPUContext(context: ctx)
+            // Releasing the context (WgpuContext.deinit) drains the GPU queue and
+            // releases the device and its internal staging buffers.
+            wgpuContext = nil
         }
     }
+}
+
+// MARK: - GestureManagerDelegate
+
+extension DotLottieWebGPUView: GestureManagerDelegate {
+    func gestureManagerDidRecognizeDown(_ gestureManager: GestureManager, at location: CGPoint) {
+        postPointerEvent(Event.pointerDown, at: location)
+    }
+
+    func gestureManagerDidRecognizeMove(_ gestureManager: GestureManager, at location: CGPoint) {
+        postPointerEvent(Event.pointerMove, at: location)
+    }
+
+    func gestureManagerDidRecognizeUp(_ gestureManager: GestureManager, at location: CGPoint) {
+        postPointerEvent(Event.pointerUp, at: location)
+    }
+
+    func gestureManagerDidRecognizeTap(_ gestureManager: GestureManager, at location: CGPoint) {
+        postPointerEvent(Event.click, at: location)
+    }
+
+#if os(macOS)
+    func gestureManagerDidRecognizeHover(_ gestureManager: GestureManager, at location: CGPoint) {
+        postPointerEvent(Event.pointerEnter, at: location)
+    }
+
+    func gestureManagerDidRecognizeExitHover(_ gestureManager: GestureManager, at location: CGPoint) {
+        postPointerEvent(Event.pointerExit, at: location)
+    }
+#endif
 }
 
 #endif

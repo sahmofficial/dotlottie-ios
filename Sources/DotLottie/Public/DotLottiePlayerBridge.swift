@@ -746,33 +746,6 @@ public class DotLottiePlayer {
         return dotlottie_set_wg_target(ptr, device, instance, target, width, height, targetType) == Success
     }
 
-    // MARK: - WebGPU Context Management
-
-    /// Create a WebGPU context from a CAMetalLayer pointer.
-    /// Must be called on the main thread.
-    public static func createWebGPUContext(metalLayer: UnsafeMutableRawPointer) -> UnsafeMutableRawPointer? {
-        return dotlottie_create_wgpu_context_from_metal_layer(metalLayer)
-    }
-
-    /// Extract the device, instance, and surface pointers from a WebGPU context.
-    public static func getWebGPUPointers(context: UnsafeRawPointer) -> (device: UInt64, instance: UInt64, surface: UInt64)? {
-        var device: UInt64 = 0
-        var instance: UInt64 = 0
-        var surface: UInt64 = 0
-        dotlottie_wgpu_context_get_pointers(context, &device, &instance, &surface)
-        guard device != 0 || instance != 0 || surface != 0 else { return nil }
-        return (device: device, instance: instance, surface: surface)
-    }
-
-    /// Release a WebGPU context created with `createWebGPUContext`.
-    public static func freeWebGPUContext(context: UnsafeMutableRawPointer) {
-        dotlottie_free_wgpu_context(context)
-    }
-
-    /// Present the rendered frame to the screen. Call once per rendered frame.
-    public static func presentWebGPUSurface(context: UnsafeRawPointer) {
-        dotlottie_wgpu_context_present(context)
-    }
 
     // MARK: - Manifest
 
