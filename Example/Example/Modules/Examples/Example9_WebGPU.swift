@@ -12,7 +12,7 @@ struct Example9_WebGPU: View {
                 .foregroundColor(.secondary)
 
             DotLottieWebGPUPlayerView(
-                fileName: "adding-guests",
+                fileName: "coffee",
                 config: Config(autoplay: true, loopAnimation: true)
             )
             { view in

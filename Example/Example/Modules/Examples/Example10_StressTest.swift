@@ -15,7 +15,7 @@ struct Example10_StressTest: View {
     /// Preferred heavy animation: drop a `stress-4k.lottie` (or `.json`) into
     /// `Example/Example/Animations/` and add it to the app target. Until then the screen
     /// falls back to the bundled `coffee.lottie` so it's runnable out of the box.
-    static let preferredName = "pigeon"
+    static let preferredName = "coffee"
     static let fallbackName = "coffee"
 
     @State private var renderer: Renderer = .webGPU
