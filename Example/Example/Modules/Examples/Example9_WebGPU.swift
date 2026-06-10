@@ -12,8 +12,8 @@ struct Example9_WebGPU: View {
                 .foregroundColor(.secondary)
 
             DotLottieWebGPUPlayerView(
-                fileName: "BrandToggle",
-                config: Config(stateMachineId: "StateMachine1")
+                fileName: "adding-guests",
+                config: Config(autoplay: true, loopAnimation: true)
             )
             { view in
                 gpuView = view
