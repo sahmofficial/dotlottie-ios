@@ -226,13 +226,9 @@ public class DotLottieWebGPUView: PlatformBase {
         // Debug fires -[MTLDebugDevice notifyExternalReferencesNonZeroOnDealloc:]
         // because the Signal ObjC object (in the run-loop pool) still holds a Metal
         // retain on the Staging buffer when wgpu recycles it.
-        // Opt-in render-time measurement (no overhead unless a probe is attached).
-        var rendered = false
-
         autoreleasepool {
             if bridge.tick(dt: dt) {
                 wgpuContext?.present()
-                rendered = true
             }
         }
     }
