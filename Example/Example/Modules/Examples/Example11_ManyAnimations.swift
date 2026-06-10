@@ -16,7 +16,7 @@ import DotLottie
 /// Looping animations from the bundle, cycled to fill the grid.
 private let benchmarkAnimationPool = [
     "adding-guests",
-    "confettiSRFK2025",
+    "confetti",
     "pigeon",
     "star-marked",
     "smiley-slider",

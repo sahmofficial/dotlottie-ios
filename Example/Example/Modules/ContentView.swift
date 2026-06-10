@@ -10,95 +10,114 @@ import DotLottie
 
 struct ContentView: View {
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: Text("Original DotLottie Examples")) {
-                    NavigationLink("Basic Example") {
-                        OriginalExampleView()
-                    }
-                }
-                
-                Section(header: Text("New LottieAnimationView-Style API")) {
-#if canImport(UIKit)
-                    NavigationLink("UIKit Example (DotLottiePlayerUIView)") {
-                        UIKitExampleViewWrapper()
-                    }
-#endif
-                    
-                    NavigationLink("SwiftUI Example (DotLottiePlayerView)") {
-                        SwiftUIExampleView()
-                    }
-                }
-                
-                Section(header: Text("State Machine & Interactivity")) {
-                    NavigationLink("SwiftUI State Machine Example") {
-                        Example7_StateMachine()
-                    }
-                    
-#if canImport(UIKit)
-                    NavigationLink("UIKit State Machine Example") {
-                        UIKitStateMachineViewWrapper()
-                    }
-#endif
-                }
-                
-                Section(header: Text("WebGPU Renderer")) {
-#if os(iOS) || os(macOS)
-                    NavigationLink("WebGPU Example") {
-                        ScrollView { Example9_WebGPU() }
-                            .navigationTitle("WebGPU Renderer")
-                    }
-#endif
-                }
+        // Use NavigationSplitView where available (macOS 13+/iOS 16+) — the modern
+        // replacement for the deprecated NavigationView, which on macOS can collapse
+        // its sidebar to nothing and leave the window blank. Fall back to
+        // NavigationView on older macOS (deployment target goes down to 12.5).
+        if #available(macOS 13.0, iOS 16.0, *) {
+            NavigationSplitView {
+                exampleList
+            } detail: {
+                Text("Select an example")
+                    .font(.title3)
+                    .foregroundColor(.secondary)
+            }
+        } else {
+            NavigationView {
+                exampleList
+            }
+        }
+    }
 
-                Section(header: Text("Performance & Benchmarking")) {
-#if os(iOS) || os(macOS)
-                    NavigationLink("4K Stress Test (CPU vs WebGPU)") {
-                        Example10_StressTest()
-                    }
-
-                    NavigationLink("Many Animations (CPU vs WebGPU)") {
-                        Example11_ManyAnimations()
-                    }
-#endif
-                }
-
-                Section(header: Text("About")) {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("DotLottie iOS Test App")
-                            .font(.headline)
-                        
-                        Text("This app demonstrates different ways to use dotlottie animations:")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                        
-                        Text("• Original DotLottie API")
-                            .font(.caption)
-                        
-#if canImport(UIKit)
-                        Text("• UIKit: DotLottiePlayerUIView (like LottieAnimationView)")
-                            .font(.caption)
-#else
-                        Text("• AppKit: DotLottiePlayerUIView (like LottieAnimationView)")
-                            .font(.caption)
-#endif
-                        
-                        Text("• SwiftUI: DotLottiePlayerView (like LottieView)")
-                            .font(.caption)
-                        
-#if canImport(UIKit)
-                        Text("• State Machine examples with touch interaction")
-                            .font(.caption)
-#else
-                        Text("• State Machine examples with mouse interaction")
-                            .font(.caption)
-#endif
-                    }
-                    .padding(.vertical, 8)
+    @ViewBuilder
+    private var exampleList: some View {
+        List {
+            Section(header: Text("Original DotLottie Examples")) {
+                NavigationLink("Basic Example") {
+                    OriginalExampleView()
                 }
             }
-            .navigationTitle("DotLottie Examples")
+
+            Section(header: Text("New LottieAnimationView-Style API")) {
+#if canImport(UIKit)
+                NavigationLink("UIKit Example (DotLottiePlayerUIView)") {
+                    UIKitExampleViewWrapper()
+                }
+#endif
+
+                NavigationLink("SwiftUI Example (DotLottiePlayerView)") {
+                    SwiftUIExampleView()
+                }
+            }
+
+            Section(header: Text("State Machine & Interactivity")) {
+                NavigationLink("SwiftUI State Machine Example") {
+                    Example7_StateMachine()
+                }
+
+#if canImport(UIKit)
+                NavigationLink("UIKit State Machine Example") {
+                    UIKitStateMachineViewWrapper()
+                }
+#endif
+            }
+
+            Section(header: Text("WebGPU Renderer")) {
+#if os(iOS) || os(macOS)
+                NavigationLink("WebGPU Example") {
+                    ScrollView { Example9_WebGPU() }
+                        .navigationTitle("WebGPU Renderer")
+                }
+#endif
+            }
+
+            Section(header: Text("Performance & Benchmarking")) {
+#if os(iOS) || os(macOS)
+                NavigationLink("4K Stress Test (CPU vs WebGPU)") {
+                    Example10_StressTest()
+                }
+
+                NavigationLink("Many Animations (CPU vs WebGPU)") {
+                    Example11_ManyAnimations()
+                }
+#endif
+            }
+
+            Section(header: Text("About")) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("DotLottie iOS Test App")
+                        .font(.headline)
+
+                    Text("This app demonstrates different ways to use dotlottie animations:")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+
+                    Text("• Original DotLottie API")
+                        .font(.caption)
+
+#if canImport(UIKit)
+                    Text("• UIKit: DotLottiePlayerUIView (like LottieAnimationView)")
+                        .font(.caption)
+#else
+                    Text("• AppKit: DotLottiePlayerUIView (like LottieAnimationView)")
+                        .font(.caption)
+#endif
+
+                    Text("• SwiftUI: DotLottiePlayerView (like LottieView)")
+                        .font(.caption)
+
+#if canImport(UIKit)
+                    Text("• State Machine examples with touch interaction")
+                        .font(.caption)
+#else
+                    Text("• State Machine examples with mouse interaction")
+                        .font(.caption)
+#endif
+                }
+                .padding(.vertical, 8)
+            }
         }
+        .navigationTitle("DotLottie Examples")
     }
 }
 
@@ -112,12 +131,12 @@ struct OriginalExampleView: View {
             loop: true
         )
     )
-    
+
     var body: some View {
         VStack {
             animation.view()
                 .padding()
-            
+
             Button {
                 if animation.isPlaying() {
                     _ = animation.pause()
@@ -142,7 +161,7 @@ struct UIKitExampleViewWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIKitExampleViewController {
         return UIKitExampleViewController()
     }
-    
+
     func updateUIViewController(_ uiViewController: UIKitExampleViewController, context: Context) {
         // No updates needed
     }
@@ -152,7 +171,7 @@ struct UIKitStateMachineViewWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIKitStateMachineViewController {
         return UIKitStateMachineViewController()
     }
-    
+
     func updateUIViewController(_ uiViewController: UIKitStateMachineViewController, context: Context) {
         // No updates needed
     }
