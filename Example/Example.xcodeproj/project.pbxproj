@@ -31,6 +31,7 @@
 		0A579CC82EB90FD60062BA6E /* hold-button.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A579CB32EB90FD60062BA6E /* hold-button.json */; };
 		0A579CC92EB90FD60062BA6E /* toggle.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A579CBB2EB90FD60062BA6E /* toggle.json */; };
 		0A579CCB2EB910650062BA6E /* Example6_MultipleAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A579CCA2EB910650062BA6E /* Example6_MultipleAnimations.swift */; };
+		FE12000000000000000012B1 /* Example12_DynamicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE12000000000000000012A1 /* Example12_DynamicLayout.swift */; };
 		0A579CCD2EB913130062BA6E /* UIKitStateMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A579CCC2EB913130062BA6E /* UIKitStateMachineViewController.swift */; };
 		0A579CD02EB913310062BA6E /* Example7_StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A579CCF2EB913310062BA6E /* Example7_StateMachine.swift */; };
 		0A579CD22EB9244D0062BA6E /* adding-guests.lottie in Resources */ = {isa = PBXBuildFile; fileRef = 0A579CD12EB9244D0062BA6E /* adding-guests.lottie */; };
@@ -80,6 +81,7 @@
 		0A579CBA2EB90FD60062BA6E /* theming.lottie */ = {isa = PBXFileReference; lastKnownFileType = file; path = theming.lottie; sourceTree = "<group>"; };
 		0A579CBB2EB90FD60062BA6E /* toggle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = toggle.json; sourceTree = "<group>"; };
 		0A579CCA2EB910650062BA6E /* Example6_MultipleAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example6_MultipleAnimations.swift; sourceTree = "<group>"; };
+		FE12000000000000000012A1 /* Example12_DynamicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example12_DynamicLayout.swift; sourceTree = "<group>"; };
 		0A579CCC2EB913130062BA6E /* UIKitStateMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitStateMachineViewController.swift; sourceTree = "<group>"; };
 		0A579CCF2EB913310062BA6E /* Example7_StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example7_StateMachine.swift; sourceTree = "<group>"; };
 		0A579CD12EB9244D0062BA6E /* adding-guests.lottie */ = {isa = PBXFileReference; lastKnownFileType = file; path = "adding-guests.lottie"; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				0A579CCA2EB910650062BA6E /* Example6_MultipleAnimations.swift */,
 				0A579CCF2EB913310062BA6E /* Example7_StateMachine.swift */,
 				22BF20542FC82BFF00316B28 /* Example8_URLLoading.swift */,
+				FE12000000000000000012A1 /* Example12_DynamicLayout.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				0A579CA92EB90D280062BA6E /* Example2_WithControls.swift in Sources */,
 				0A579CAA2EB90D280062BA6E /* Example4_AsyncLoading.swift in Sources */,
 				0A579CCB2EB910650062BA6E /* Example6_MultipleAnimations.swift in Sources */,
+				FE12000000000000000012B1 /* Example12_DynamicLayout.swift in Sources */,
 				0A579CAB2EB90D280062BA6E /* Example5_CustomConfiguration.swift in Sources */,
 				0A579CAC2EB90D280062BA6E /* AnimationInfoView.swift in Sources */,
 				226C88C32AFE9A0300A72D3A /* DataFile.swift in Sources */,
