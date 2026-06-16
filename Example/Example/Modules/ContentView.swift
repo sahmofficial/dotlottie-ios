@@ -45,6 +45,13 @@ struct ContentView: View {
                     }
                 }
 
+                Section(header: Text("Layout")) {
+                    NavigationLink("Dynamic Layout (Fit & Alignment)") {
+                        ScrollView { Example12_DynamicLayout() }
+                            .navigationTitle("Dynamic Layout")
+                    }
+                }
+
                 Section(header: Text("State Machine & Interactivity")) {
                     NavigationLink("SwiftUI State Machine Example") {
                         Example7_StateMachine()

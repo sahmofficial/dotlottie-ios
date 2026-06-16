@@ -504,12 +504,27 @@ public final class DotLottieAnimation: ObservableObject {
     
     public func setMode(mode: Mode) {
         var config = player.config()
-        
+
         config.mode = mode
-        
+
         player.setConfig(config: config)
     }
-    
+
+    /// The current layout (fit + alignment) used to position the animation within the view.
+    public func layout() -> Layout {
+        return player.config().layout
+    }
+
+    /// Update how the animation is fitted and aligned within the view.
+    /// Takes effect immediately on the next rendered frame.
+    public func setLayout(layout: Layout) {
+        var config = player.config()
+
+        config.layout = layout
+
+        player.setConfig(config: config)
+    }
+
     public func isPlaying() -> Bool {
         return player.isPlaying()
     }
