@@ -55,7 +55,6 @@ struct Example6_MultipleAnimations: View {
         "idle",
         "loader",
         "loadingAnimation",
-        "LTR_D3",
         "pigeon",
         "smiley-slider",
         "star-marked",

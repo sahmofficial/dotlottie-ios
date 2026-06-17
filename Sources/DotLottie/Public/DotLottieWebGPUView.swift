@@ -135,6 +135,7 @@ public class DotLottieWebGPUView: PlatformBase {
     }
 #endif
 
+    // Called on resize
     private func reconfigureWebGPUIfNeeded() {
         let scale = displayScale
         let physical = CGSize(width: bounds.width * scale, height: bounds.height * scale)

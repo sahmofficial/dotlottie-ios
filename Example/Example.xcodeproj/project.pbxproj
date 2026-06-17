@@ -39,12 +39,11 @@
 		226C88B42AFE98FD00A72D3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226C88B32AFE98FD00A72D3A /* Assets.xcassets */; };
 		226C88B82AFE98FD00A72D3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226C88B72AFE98FD00A72D3A /* Preview Assets.xcassets */; };
 		2278E3F52FD6FD9200C26358 /* coffee.lottie in Resources */ = {isa = PBXBuildFile; fileRef = 2278E3F42FD6FD9200C26358 /* coffee.lottie */; };
-		22BF204E2FC5EDEA00316B28 /* Example9_WebGPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF204D2FC5EDC800316B28 /* Example9_WebGPU.swift */; };
+		227EF5372FE2E5A30050FC5E /* Example9_ManyAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EF5362FE2E5A30050FC5E /* Example9_ManyAnimations.swift */; };
+		227EF5382FE2E5A30050FC5E /* Example8_WebGPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EF5352FE2E5A30050FC5E /* Example8_WebGPU.swift */; };
 		6C6F39FC2DCC9C28006D144D /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C6F39FB2DCC9C28006D144D /* loadingAnimation.json */; };
 		6C83FFF92DD33026003F78FD /* confetti.lottie in Resources */ = {isa = PBXBuildFile; fileRef = 6C83FFF82DD33026003F78FD /* confetti.lottie */; };
 		6CD9E1882E0AAB2D007A17E9 /* Flow 1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CD9E1872E0AAB2D007A17E9 /* Flow 1.json */; };
-		FE10000000000000000010B1 /* Example10_StressTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE10000000000000000010A1 /* Example10_StressTest.swift */; };
-		FE11000000000000000011B1 /* Example11_ManyAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE11000000000000000011A1 /* Example11_ManyAnimations.swift */; };
 		FE20000000000000000020B1 /* PerformanceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE20000000000000000020A1 /* PerformanceMonitor.swift */; };
 		FE21000000000000000021B1 /* MetricsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE21000000000000000021A1 /* MetricsOverlay.swift */; };
 /* End PBXBuildFile section */
@@ -93,14 +92,13 @@
 		226C88B52AFE98FD00A72D3A /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		226C88B72AFE98FD00A72D3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2278E3F42FD6FD9200C26358 /* coffee.lottie */ = {isa = PBXFileReference; lastKnownFileType = file; path = coffee.lottie; sourceTree = "<group>"; };
-		22BF204D2FC5EDC800316B28 /* Example9_WebGPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example9_WebGPU.swift; sourceTree = "<group>"; };
+		227EF5352FE2E5A30050FC5E /* Example8_WebGPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example8_WebGPU.swift; sourceTree = "<group>"; };
+		227EF5362FE2E5A30050FC5E /* Example9_ManyAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example9_ManyAnimations.swift; sourceTree = "<group>"; };
 		22ED4A8B2F4C7D9300BEEB42 /* DotLottieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DotLottieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C6F39FB2DCC9C28006D144D /* loadingAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
 		6C78CDE52B0B4A8F008E9D26 /* Thorvg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Thorvg.framework; path = "../dotlottie-ios/Sources/Thorvg/Thorvg/artifacts/ios-simulator-aarch64/Thorvg.framework"; sourceTree = "<group>"; };
 		6C83FFF82DD33026003F78FD /* confetti.lottie */ = {isa = PBXFileReference; lastKnownFileType = file; path = confetti.lottie; sourceTree = "<group>"; };
 		6CD9E1872E0AAB2D007A17E9 /* Flow 1.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Flow 1.json"; sourceTree = "<group>"; };
-		FE10000000000000000010A1 /* Example10_StressTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example10_StressTest.swift; sourceTree = "<group>"; };
-		FE11000000000000000011A1 /* Example11_ManyAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example11_ManyAnimations.swift; sourceTree = "<group>"; };
 		FE20000000000000000020A1 /* PerformanceMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceMonitor.swift; sourceTree = "<group>"; };
 		FE21000000000000000021A1 /* MetricsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -139,9 +137,8 @@
 				0A579CA52EB90D280062BA6E /* Example5_CustomConfiguration.swift */,
 				0A579CCA2EB910650062BA6E /* Example6_MultipleAnimations.swift */,
 				0A579CCF2EB913310062BA6E /* Example7_StateMachine.swift */,
-				22BF204D2FC5EDC800316B28 /* Example9_WebGPU.swift */,
-				FE10000000000000000010A1 /* Example10_StressTest.swift */,
-				FE11000000000000000011A1 /* Example11_ManyAnimations.swift */,
+				227EF5352FE2E5A30050FC5E /* Example8_WebGPU.swift */,
+				227EF5362FE2E5A30050FC5E /* Example9_ManyAnimations.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -384,9 +381,8 @@
 				0A579CD02EB913310062BA6E /* Example7_StateMachine.swift in Sources */,
 				226C88B22AFE98FC00A72D3A /* ContentView.swift in Sources */,
 				0A579CCD2EB913130062BA6E /* UIKitStateMachineViewController.swift in Sources */,
-				22BF204E2FC5EDEA00316B28 /* Example9_WebGPU.swift in Sources */,
-				FE10000000000000000010B1 /* Example10_StressTest.swift in Sources */,
-				FE11000000000000000011B1 /* Example11_ManyAnimations.swift in Sources */,
+				227EF5372FE2E5A30050FC5E /* Example9_ManyAnimations.swift in Sources */,
+				227EF5382FE2E5A30050FC5E /* Example8_WebGPU.swift in Sources */,
 				FE20000000000000000020B1 /* PerformanceMonitor.swift in Sources */,
 				FE21000000000000000021B1 /* MetricsOverlay.swift in Sources */,
 				226C88B02AFE98FC00A72D3A /* ExampleApp.swift in Sources */,

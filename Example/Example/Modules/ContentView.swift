@@ -28,7 +28,7 @@ struct ContentView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private var exampleList: some View {
         List {
@@ -37,64 +37,56 @@ struct ContentView: View {
                     OriginalExampleView()
                 }
             }
-
+            
             Section(header: Text("New LottieAnimationView-Style API")) {
 #if canImport(UIKit)
                 NavigationLink("UIKit Example (DotLottiePlayerUIView)") {
                     UIKitExampleViewWrapper()
                 }
 #endif
-
+                
                 NavigationLink("SwiftUI Example (DotLottiePlayerView)") {
                     SwiftUIExampleView()
                 }
             }
-
+            
             Section(header: Text("State Machine & Interactivity")) {
                 NavigationLink("SwiftUI State Machine Example") {
                     Example7_StateMachine()
                 }
-
+                
 #if canImport(UIKit)
                 NavigationLink("UIKit State Machine Example") {
                     UIKitStateMachineViewWrapper()
                 }
 #endif
             }
-
-            Section(header: Text("WebGPU Renderer")) {
-#if os(iOS) || os(macOS)
-                NavigationLink("WebGPU Example") {
-                    ScrollView { Example9_WebGPU() }
-                        .navigationTitle("WebGPU Renderer")
-                }
-#endif
-            }
-
+            
+            
+#if canImport(SwiftUI) && ((os(iOS) && !targetEnvironment(macCatalyst)) || (os(macOS) && !targetEnvironment(macCatalyst)))
             Section(header: Text("Performance & Benchmarking")) {
-#if os(iOS) || os(macOS)
-                NavigationLink("4K Stress Test (CPU vs WebGPU)") {
-                    Example10_StressTest()
+                NavigationLink("Test (CPU vs WebGPU)") {
+                    Example8_StressTest()
                 }
-
+                
                 NavigationLink("Many Animations (CPU vs WebGPU)") {
-                    Example11_ManyAnimations()
+                    Example9_ManyAnimations()
                 }
-#endif
             }
-
+#endif
+            
             Section(header: Text("About")) {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("DotLottie iOS Test App")
                         .font(.headline)
-
+                    
                     Text("This app demonstrates different ways to use dotlottie animations:")
                         .font(.caption)
                         .foregroundColor(.secondary)
-
+                    
                     Text("• Original DotLottie API")
                         .font(.caption)
-
+                    
 #if canImport(UIKit)
                     Text("• UIKit: DotLottiePlayerUIView (like LottieAnimationView)")
                         .font(.caption)
@@ -102,10 +94,10 @@ struct ContentView: View {
                     Text("• AppKit: DotLottiePlayerUIView (like LottieAnimationView)")
                         .font(.caption)
 #endif
-
+                    
                     Text("• SwiftUI: DotLottiePlayerView (like LottieView)")
                         .font(.caption)
-
+                    
 #if canImport(UIKit)
                     Text("• State Machine examples with touch interaction")
                         .font(.caption)
@@ -131,12 +123,12 @@ struct OriginalExampleView: View {
             loop: true
         )
     )
-
+    
     var body: some View {
         VStack {
             animation.view()
                 .padding()
-
+            
             Button {
                 if animation.isPlaying() {
                     _ = animation.pause()
@@ -161,7 +153,7 @@ struct UIKitExampleViewWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIKitExampleViewController {
         return UIKitExampleViewController()
     }
-
+    
     func updateUIViewController(_ uiViewController: UIKitExampleViewController, context: Context) {
         // No updates needed
     }
@@ -171,7 +163,7 @@ struct UIKitStateMachineViewWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIKitStateMachineViewController {
         return UIKitStateMachineViewController()
     }
-
+    
     func updateUIViewController(_ uiViewController: UIKitStateMachineViewController, context: Context) {
         // No updates needed
     }
