@@ -44,17 +44,39 @@ struct ContentView: View {
                     UIKitExampleViewWrapper()
                 }
 #endif
-                
-                NavigationLink("SwiftUI Example (DotLottiePlayerView)") {
-                    SwiftUIExampleView()
-                }
-            }
-            
-            Section(header: Text("State Machine & Interactivity")) {
-                NavigationLink("SwiftUI State Machine Example") {
-                    Example7_StateMachine()
+                    
+                    NavigationLink("SwiftUI Example (DotLottiePlayerView)") {
+                        SwiftUIExampleView()
+                    }
                 }
                 
+                Section(header: Text("URL Loading")) {
+                    NavigationLink("Load from URL") {
+                        ScrollView {
+                            VStack(spacing: 24) {
+                                Text("URL Loading")
+                                    .font(.headline)
+                                    .padding(.top)
+                                Example8_URLLoading()
+                                Spacer(minLength: 24)
+                            }
+                        }
+                        .navigationTitle("URL Loading")
+                    }
+                }
+
+                Section(header: Text("Layout")) {
+                    NavigationLink("Dynamic Layout (Fit & Alignment)") {
+                        ScrollView { Example12_DynamicLayout() }
+                            .navigationTitle("Dynamic Layout")
+                    }
+                }
+
+                Section(header: Text("State Machine & Interactivity")) {
+                    NavigationLink("SwiftUI State Machine Example") {
+                        Example7_StateMachine()
+                    }
+                    
 #if canImport(UIKit)
                 NavigationLink("UIKit State Machine Example") {
                     UIKitStateMachineViewWrapper()
@@ -66,11 +88,11 @@ struct ContentView: View {
 #if canImport(SwiftUI) && ((os(iOS) && !targetEnvironment(macCatalyst)) || (os(macOS) && !targetEnvironment(macCatalyst)))
             Section(header: Text("Performance & Benchmarking")) {
                 NavigationLink("Test (CPU vs WebGPU)") {
-                    Example8_StressTest()
+                    Example10_StressTest()
                 }
-                
+
                 NavigationLink("Many Animations (CPU vs WebGPU)") {
-                    Example9_ManyAnimations()
+                    Example11_ManyAnimations()
                 }
             }
 #endif

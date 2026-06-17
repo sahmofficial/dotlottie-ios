@@ -1,5 +1,5 @@
 //
-//  Example10_StressTest.swift
+//  Example10_WebGPU.swift
 //  DotLottieIosTestApp
 //
 //  Single heavy ("4K") animation, full-screen, with a CPU/WebGPU toggle and a live metrics
@@ -10,7 +10,7 @@ import SwiftUI
 import DotLottie
 
 #if (os(iOS) && !targetEnvironment(macCatalyst)) || os(macOS)
-struct Example8_StressTest: View {
+struct Example10_StressTest: View {
 
     /// Preferred heavy animation: drop a `stress-4k.lottie` (or `.json`) into
     /// `Example/Example/Animations/` and add it to the app target. Until then the screen

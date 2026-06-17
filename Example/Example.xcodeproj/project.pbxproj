@@ -30,6 +30,7 @@
 		0A579CC82EB90FD60062BA6E /* hold-button.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A579CB32EB90FD60062BA6E /* hold-button.json */; };
 		0A579CC92EB90FD60062BA6E /* toggle.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A579CBB2EB90FD60062BA6E /* toggle.json */; };
 		0A579CCB2EB910650062BA6E /* Example6_MultipleAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A579CCA2EB910650062BA6E /* Example6_MultipleAnimations.swift */; };
+		FE12000000000000000012B1 /* Example12_DynamicLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE12000000000000000012A1 /* Example12_DynamicLayout.swift */; };
 		0A579CCD2EB913130062BA6E /* UIKitStateMachineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A579CCC2EB913130062BA6E /* UIKitStateMachineViewController.swift */; };
 		0A579CD02EB913310062BA6E /* Example7_StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A579CCF2EB913310062BA6E /* Example7_StateMachine.swift */; };
 		0A579CD22EB9244D0062BA6E /* adding-guests.lottie in Resources */ = {isa = PBXBuildFile; fileRef = 0A579CD12EB9244D0062BA6E /* adding-guests.lottie */; };
@@ -38,9 +39,9 @@
 		226C88B22AFE98FC00A72D3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226C88B12AFE98FC00A72D3A /* ContentView.swift */; };
 		226C88B42AFE98FD00A72D3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226C88B32AFE98FD00A72D3A /* Assets.xcassets */; };
 		226C88B82AFE98FD00A72D3A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 226C88B72AFE98FD00A72D3A /* Preview Assets.xcassets */; };
-		2278E3F52FD6FD9200C26358 /* coffee.lottie in Resources */ = {isa = PBXBuildFile; fileRef = 2278E3F42FD6FD9200C26358 /* coffee.lottie */; };
-		227EF5372FE2E5A30050FC5E /* Example9_ManyAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EF5362FE2E5A30050FC5E /* Example9_ManyAnimations.swift */; };
-		227EF5382FE2E5A30050FC5E /* Example8_WebGPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EF5352FE2E5A30050FC5E /* Example8_WebGPU.swift */; };
+		22BF20552FC82BFF00316B28 /* Example8_URLLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BF20542FC82BFF00316B28 /* Example8_URLLoading.swift */; };
+		227EF5372FE2E5A30050FC5E /* Example11_ManyAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EF5392FE2E5A30050FC5E /* Example11_ManyAnimations.swift */; };
+		227EF5382FE2E5A30050FC5E /* Example10_WebGPU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227EF53A2FE2E5A30050FC5E /* Example10_WebGPU.swift */; };
 		6C6F39FC2DCC9C28006D144D /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 6C6F39FB2DCC9C28006D144D /* loadingAnimation.json */; };
 		6C83FFF92DD33026003F78FD /* confetti.lottie in Resources */ = {isa = PBXBuildFile; fileRef = 6C83FFF82DD33026003F78FD /* confetti.lottie */; };
 		6CD9E1882E0AAB2D007A17E9 /* Flow 1.json in Resources */ = {isa = PBXBuildFile; fileRef = 6CD9E1872E0AAB2D007A17E9 /* Flow 1.json */; };
@@ -81,6 +82,7 @@
 		0A579CBA2EB90FD60062BA6E /* theming.lottie */ = {isa = PBXFileReference; lastKnownFileType = file; path = theming.lottie; sourceTree = "<group>"; };
 		0A579CBB2EB90FD60062BA6E /* toggle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = toggle.json; sourceTree = "<group>"; };
 		0A579CCA2EB910650062BA6E /* Example6_MultipleAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example6_MultipleAnimations.swift; sourceTree = "<group>"; };
+		FE12000000000000000012A1 /* Example12_DynamicLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example12_DynamicLayout.swift; sourceTree = "<group>"; };
 		0A579CCC2EB913130062BA6E /* UIKitStateMachineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitStateMachineViewController.swift; sourceTree = "<group>"; };
 		0A579CCF2EB913310062BA6E /* Example7_StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example7_StateMachine.swift; sourceTree = "<group>"; };
 		0A579CD12EB9244D0062BA6E /* adding-guests.lottie */ = {isa = PBXFileReference; lastKnownFileType = file; path = "adding-guests.lottie"; sourceTree = "<group>"; };
@@ -91,9 +93,9 @@
 		226C88B32AFE98FD00A72D3A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		226C88B52AFE98FD00A72D3A /* Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Example.entitlements; sourceTree = "<group>"; };
 		226C88B72AFE98FD00A72D3A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		2278E3F42FD6FD9200C26358 /* coffee.lottie */ = {isa = PBXFileReference; lastKnownFileType = file; path = coffee.lottie; sourceTree = "<group>"; };
-		227EF5352FE2E5A30050FC5E /* Example8_WebGPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example8_WebGPU.swift; sourceTree = "<group>"; };
-		227EF5362FE2E5A30050FC5E /* Example9_ManyAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example9_ManyAnimations.swift; sourceTree = "<group>"; };
+		22BF20542FC82BFF00316B28 /* Example8_URLLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example8_URLLoading.swift; sourceTree = "<group>"; };
+		227EF5392FE2E5A30050FC5E /* Example11_ManyAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example11_ManyAnimations.swift; sourceTree = "<group>"; };
+		227EF53A2FE2E5A30050FC5E /* Example10_WebGPU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example10_WebGPU.swift; sourceTree = "<group>"; };
 		22ED4A8B2F4C7D9300BEEB42 /* DotLottieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DotLottieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C6F39FB2DCC9C28006D144D /* loadingAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
 		6C78CDE52B0B4A8F008E9D26 /* Thorvg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Thorvg.framework; path = "../dotlottie-ios/Sources/Thorvg/Thorvg/artifacts/ios-simulator-aarch64/Thorvg.framework"; sourceTree = "<group>"; };
@@ -137,8 +139,10 @@
 				0A579CA52EB90D280062BA6E /* Example5_CustomConfiguration.swift */,
 				0A579CCA2EB910650062BA6E /* Example6_MultipleAnimations.swift */,
 				0A579CCF2EB913310062BA6E /* Example7_StateMachine.swift */,
-				227EF5352FE2E5A30050FC5E /* Example8_WebGPU.swift */,
-				227EF5362FE2E5A30050FC5E /* Example9_ManyAnimations.swift */,
+				22BF20542FC82BFF00316B28 /* Example8_URLLoading.swift */,
+				227EF53A2FE2E5A30050FC5E /* Example10_WebGPU.swift */,
+				227EF5392FE2E5A30050FC5E /* Example11_ManyAnimations.swift */,
+				FE12000000000000000012A1 /* Example12_DynamicLayout.swift */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -374,15 +378,17 @@
 				0A579CA92EB90D280062BA6E /* Example2_WithControls.swift in Sources */,
 				0A579CAA2EB90D280062BA6E /* Example4_AsyncLoading.swift in Sources */,
 				0A579CCB2EB910650062BA6E /* Example6_MultipleAnimations.swift in Sources */,
+				FE12000000000000000012B1 /* Example12_DynamicLayout.swift in Sources */,
 				0A579CAB2EB90D280062BA6E /* Example5_CustomConfiguration.swift in Sources */,
 				0A579CAC2EB90D280062BA6E /* AnimationInfoView.swift in Sources */,
+				22BF20552FC82BFF00316B28 /* Example8_URLLoading.swift in Sources */,
 				0A579A712EB8D53A0062BA6E /* UIKitExampleViewController.swift in Sources */,
 				0A579A722EB8D53A0062BA6E /* SwiftUIExampleView.swift in Sources */,
 				0A579CD02EB913310062BA6E /* Example7_StateMachine.swift in Sources */,
 				226C88B22AFE98FC00A72D3A /* ContentView.swift in Sources */,
 				0A579CCD2EB913130062BA6E /* UIKitStateMachineViewController.swift in Sources */,
-				227EF5372FE2E5A30050FC5E /* Example9_ManyAnimations.swift in Sources */,
-				227EF5382FE2E5A30050FC5E /* Example8_WebGPU.swift in Sources */,
+				227EF5372FE2E5A30050FC5E /* Example11_ManyAnimations.swift in Sources */,
+				227EF5382FE2E5A30050FC5E /* Example10_WebGPU.swift in Sources */,
 				FE20000000000000000020B1 /* PerformanceMonitor.swift in Sources */,
 				FE21000000000000000021B1 /* MetricsOverlay.swift in Sources */,
 				226C88B02AFE98FC00A72D3A /* ExampleApp.swift in Sources */,
@@ -537,7 +543,17 @@
 				DEVELOPMENT_TEAM = UM7L666YM5;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -580,7 +596,17 @@
 				DEVELOPMENT_TEAM = UM7L666YM5;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;

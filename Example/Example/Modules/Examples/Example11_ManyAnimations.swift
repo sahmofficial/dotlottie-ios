@@ -24,7 +24,7 @@ private let benchmarkAnimationPool = [
     "theming",
 ]
 
-struct Example9_ManyAnimations: View {
+struct Example11_ManyAnimations: View {
     @State private var renderer: Renderer = .webGPU
     @State private var count: Int = 30
     @StateObject private var monitor = PerformanceMonitor()
