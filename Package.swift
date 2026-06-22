@@ -24,7 +24,10 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "DotLottie",
-            dependencies: ["DotLottiePlayer"],
+            dependencies: [
+                "DotLottiePlayer",
+                .target(name: "WgpuNative", condition: .when(platforms: [.iOS, .macOS])),
+            ],
             path: "Sources/DotLottie/"),
         .testTarget(
             name: "DotLottieTests",
@@ -35,7 +38,7 @@ let package = Package(
             // Use custom build
             //            path: "./Sources/DotLottieCore/Custom/DotLottiePlayer.xcframework"
         ),
-        
+        .binaryTarget(name: "WgpuNative", path: "./Sources/DotLottieCore/WgpuNative.xcframework"),
         // Custom Framework Builder Plugin
         .plugin(
             name: "BuildCustomFramework",

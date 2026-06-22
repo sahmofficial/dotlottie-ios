@@ -208,6 +208,74 @@ DotLottiePlayerView(animation: animation)
 
 Both APIs are fully featured and support all dotlottie capabilities including state machines, interactivity, and theming.
 
+## WebGPU renderer (experimental)
+
+In addition to the default software renderer, dotLottie iOS ships a GPU-accelerated renderer backed by WebGPU (Metal). Pixels are written directly to a `CAMetalLayer` — the CPU pixel buffer and `CGImage` conversion used by the software path are bypassed entirely. This can be a significant win for large or heavy animations.
+
+### SwiftUI - DotLottieWebGPUPlayerView
+
+```swift
+struct AnimationView: View {
+    var body: some View {
+        DotLottieWebGPUPlayerView(
+            fileName: "cool_animation",
+            config: Config(autoplay: true, loopAnimation: true)
+        )
+        .frame(height: 300)
+    }
+}
+```
+
+### UIKit/AppKit - DotLottieWebGPUView
+
+```swift
+let view = DotLottieWebGPUView(config: Config(autoplay: true, loopAnimation: true))
+view.loadAnimation(fileName: "cool_animation")
+
+// Playback
+view.play()
+view.pause()
+view.stop()
+```
+
+### State machines
+
+Name a state machine in the config and it is loaded and started automatically once the animation has finished loading. Taps and drags on the view are forwarded to the running state machine, so interactive animations work out of the box.
+
+```swift
+DotLottieWebGPUPlayerView(
+    fileName: "cool_animation",
+    config: Config(stateMachineId: "StateMachine1")
+)
+```
+
+For runtime control, grab a reference to the underlying view via the `onViewCreated` callback (dispatched asynchronously, so it is safe to assign to `@State`). The underlying player is exposed via `view.player` for the full API (state-machine inputs, events, etc.):
+
+```swift
+struct AnimationView: View {
+    @State private var gpuView: DotLottieWebGPUView?
+
+    var body: some View {
+        DotLottieWebGPUPlayerView(
+            fileName: "cool_animation",
+            config: Config(stateMachineId: "StateMachine1")
+        ) { view in
+            gpuView = view
+        }
+        .frame(height: 300)
+
+        Button("Fire event") {
+            gpuView?.player.stateMachineFireEvent(event: "toggle")
+        }
+    }
+}
+```
+
+### Limitations
+
+- **Platform support:** iOS (excluding Mac Catalyst) and macOS only. On all other platforms (Mac Catalyst, tvOS, watchOS, visionOS) use the software-rendering views above.
+- **No background color customisation yet:** the WebGPU surface is rendered opaque, so transparent backgrounds and `Config.backgroundColor` are not currently honoured by this renderer. Use the software renderer if you need a transparent or custom background.
+
 ## API
 
 ### Properties

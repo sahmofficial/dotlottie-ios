@@ -221,7 +221,7 @@ public final class DotLottieAnimation: ObservableObject {
                              animationId: config.animationId ?? "")
         
         self.player = Player(config: self.config, threads: threads)
-        
+
         if (config.width != nil || config.height != nil) {
             self.sizeOverrideActive = true
         }
@@ -348,25 +348,6 @@ public final class DotLottieAnimation: ObservableObject {
             animationModel.errorMessage = error.localizedDescription
             
             throw error
-        }
-    }
-    
-    private func initWidthHeight(animationData: String?, animationFilePath: URL?) {
-        // Parse width and height of animation
-        do {
-            if let aData = animationData {
-                let (animWidth, animHeight) = try getAnimationWidthHeight(animationData: aData)
-                self.animationModel.width = Int(animWidth)
-                self.animationModel.height = Int(animHeight)
-            } else if let aFP = animationFilePath {
-                let (animWidth, animHeight) = try getAnimationWidthHeight(filePath: aFP)
-                self.animationModel.width = Int(animWidth)
-                self.animationModel.height = Int(animHeight)
-            }
-        } catch {
-            // If for some reason width and height are missing, set to defaults
-            self.animationModel.width = self.defaultWidthHeight
-            self.animationModel.height = self.defaultWidthHeight
         }
     }
     

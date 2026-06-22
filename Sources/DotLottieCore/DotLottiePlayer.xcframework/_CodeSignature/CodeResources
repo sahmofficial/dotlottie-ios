@@ -6,47 +6,47 @@
 	<dict>
 		<key>ios-arm64/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<data>
-		U49kap9cn/WdEke91ZnSdUhPBgQ=
+		0MLikzEPkkiPZr4+ivOaFLPWChU=
 		</data>
 		<key>ios-arm64/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>ios-arm64/DotLottiePlayer.framework/Info.plist</key>
 		<data>
-		xMDzaXjmUvYoGbZ/LP8TTQSbW+0=
+		wak9LCIa0frl6LwQo+fF5+ydNAU=
 		</data>
 		<key>ios-arm64/DotLottiePlayer.framework/Modules/module.modulemap</key>
 		<data>
 		jP7gSAoZi1M6FHwUEE7yi2ldR+A=
 		</data>
-		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/DotLottiePlayer</key>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/A/DotLottiePlayer</key>
 		<data>
-		gx0jC4oiT+D23Yg8SR8UeRMlp9g=
+		wj8Dkc1gDpKAUL1NVZuQIAipTAk=
 		</data>
-		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/A/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
-		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Info.plist</key>
-		<data>
-		V2cz6bmFPhxvhWVWcQHxazor+7I=
-		</data>
-		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Modules/module.modulemap</key>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/A/Modules/module.modulemap</key>
 		<data>
 		jP7gSAoZi1M6FHwUEE7yi2ldR+A=
 		</data>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/A/Resources/Info.plist</key>
+		<data>
+		1JEeamjSKnskRIIdviZl01N8sP4=
+		</data>
 		<key>ios-arm64_x86_64-simulator/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<data>
-		wlw8pjZlH3T0woUCCsiHxqKYiYE=
+		59B+6bjGqCXX8lmdtkgQwBi8QuM=
 		</data>
 		<key>ios-arm64_x86_64-simulator/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>ios-arm64_x86_64-simulator/DotLottiePlayer.framework/Info.plist</key>
 		<data>
-		e76DOo3CyzEtVJYCeoNMQVk+5d4=
+		RpdmJ7P1eGB2/NAuwjsVeuyvi/g=
 		</data>
 		<key>ios-arm64_x86_64-simulator/DotLottiePlayer.framework/Modules/module.modulemap</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>macos-arm64_x86_64/DotLottiePlayer.framework/Versions/A/DotLottiePlayer</key>
 		<data>
-		ERti5Od+DFW2ZHqq4xdXR+ixKgc=
+		K5td/80EtnxjLP3f8SRlYXc38JE=
 		</data>
 		<key>macos-arm64_x86_64/DotLottiePlayer.framework/Versions/A/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>macos-arm64_x86_64/DotLottiePlayer.framework/Versions/A/Modules/module.modulemap</key>
 		<data>
@@ -66,19 +66,19 @@
 		</data>
 		<key>macos-arm64_x86_64/DotLottiePlayer.framework/Versions/A/Resources/Info.plist</key>
 		<data>
-		xTkrODOz3gc1H9gZCORVhcsPIZs=
+		hA/0z8T+TAM5xv9DMfx3F+6H+oU=
 		</data>
 		<key>tvos-arm64-simulator/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<data>
-		5safLMqxTKRS6oNtXMcyZpKDPrU=
+		MjL/CEMBw4KKogSGh/P7NCHjkWA=
 		</data>
 		<key>tvos-arm64-simulator/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>tvos-arm64-simulator/DotLottiePlayer.framework/Info.plist</key>
 		<data>
-		/RuxdGhYzFgIfFI90PboGIY0LZo=
+		2XmbAwIconBMZAPi3APXU6HnJBA=
 		</data>
 		<key>tvos-arm64-simulator/DotLottiePlayer.framework/Modules/module.modulemap</key>
 		<data>
@@ -86,15 +86,15 @@
 		</data>
 		<key>tvos-arm64/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<data>
-		TyfSFACbJ1r44ttzWjWUJJwiaJ0=
+		VmMI/d6Nl9aOJUN7C5ghQatdBXg=
 		</data>
 		<key>tvos-arm64/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>tvos-arm64/DotLottiePlayer.framework/Info.plist</key>
 		<data>
-		UvICZ0P2IYAf324EUG/XqGewCnM=
+		GfzGxYPz2Ox1b/0rYz40kqRBRJ4=
 		</data>
 		<key>tvos-arm64/DotLottiePlayer.framework/Modules/module.modulemap</key>
 		<data>
@@ -102,15 +102,15 @@
 		</data>
 		<key>watchos-arm64-simulator/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<data>
-		bbmreGXs+fy5Y22XJcVu18hhYa4=
+		NamT5Qn/QbUR30bj1gCo7/2rnTk=
 		</data>
 		<key>watchos-arm64-simulator/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>watchos-arm64-simulator/DotLottiePlayer.framework/Info.plist</key>
 		<data>
-		lt7glex+JXJxT3xnIPrcMgh9wH8=
+		WMSwpxkSId7CJ3uz3ctav6SvDT4=
 		</data>
 		<key>watchos-arm64-simulator/DotLottiePlayer.framework/Modules/module.modulemap</key>
 		<data>
@@ -118,15 +118,15 @@
 		</data>
 		<key>watchos-arm64_arm64_32_armv7k/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<data>
-		G9A6+lmrm6vLay0+HuYH6JT+laA=
+		xxZxTj4oDewDD+vA+kKX3RfmLVw=
 		</data>
 		<key>watchos-arm64_arm64_32_armv7k/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>watchos-arm64_arm64_32_armv7k/DotLottiePlayer.framework/Info.plist</key>
 		<data>
-		CNQd3rXDBYxDW7HOAQwtEKOOb3s=
+		B11EYxEcCCsj4itkVIogKdseHAQ=
 		</data>
 		<key>watchos-arm64_arm64_32_armv7k/DotLottiePlayer.framework/Modules/module.modulemap</key>
 		<data>
@@ -134,15 +134,15 @@
 		</data>
 		<key>xros-arm64-simulator/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<data>
-		ZzkJLvlGI1mvridn04V09xKRlC8=
+		J8uJq97C8KXI533jD8IpTd23RLs=
 		</data>
 		<key>xros-arm64-simulator/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>xros-arm64-simulator/DotLottiePlayer.framework/Info.plist</key>
 		<data>
-		PfrszzeyUIe70pFmDFxwQm+RajI=
+		t98iiCWJjDreUaxbLg6YwzwqXd4=
 		</data>
 		<key>xros-arm64-simulator/DotLottiePlayer.framework/Modules/module.modulemap</key>
 		<data>
@@ -150,15 +150,15 @@
 		</data>
 		<key>xros-arm64/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<data>
-		SQ6OSUYbAJAKj+ifdKMa5+22urk=
+		vduH1bN/aNLx47BnOwKGB/A+VD8=
 		</data>
 		<key>xros-arm64/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<data>
-		OAe14LVbC4ePoczrR6/zwOZDX4s=
+		CChfpzl72sd8FPTtZj4BH8N3myw=
 		</data>
 		<key>xros-arm64/DotLottiePlayer.framework/Info.plist</key>
 		<data>
-		YOI0LSVvO2Awt9Kt8KMOURYCw/s=
+		0UaN7afnDq3myTAxbqWU9uo4HUE=
 		</data>
 		<key>xros-arm64/DotLottiePlayer.framework/Modules/module.modulemap</key>
 		<data>
@@ -171,33 +171,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			U49kap9cn/WdEke91ZnSdUhPBgQ=
+			0MLikzEPkkiPZr4+ivOaFLPWChU=
 			</data>
 			<key>hash2</key>
 			<data>
-			TCoGYVI0UgBZIFJ1PWQHcN0kyaaKCY/x7kz4WfFj8RA=
+			kOY4BegPog57VzX71uUnV14+oGvn1BawtZW8Y4q9x1I=
 			</data>
 		</dict>
 		<key>ios-arm64/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>ios-arm64/DotLottiePlayer.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			xMDzaXjmUvYoGbZ/LP8TTQSbW+0=
+			wak9LCIa0frl6LwQo+fF5+ydNAU=
 			</data>
 			<key>hash2</key>
 			<data>
-			Pj9946E8Ih7FitQdSt1SlzEnrKLPjQ5jVBPskGETiy4=
+			jyE+un2ErylXybHkwoTCSZFl4rj/qeOV6tm2ycPrKFw=
 			</data>
 		</dict>
 		<key>ios-arm64/DotLottiePlayer.framework/Modules/module.modulemap</key>
@@ -213,38 +213,47 @@
 		</dict>
 		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<dict>
-			<key>hash</key>
-			<data>
-			gx0jC4oiT+D23Yg8SR8UeRMlp9g=
-			</data>
-			<key>hash2</key>
-			<data>
-			jXJRA/p0EqYHrqah5mLxqfgMVcGHvOpVRftdMnlDXxo=
-			</data>
+			<key>symlink</key>
+			<string>Versions/Current/DotLottiePlayer</string>
 		</dict>
-		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Headers</key>
+		<dict>
+			<key>symlink</key>
+			<string>Versions/Current/Headers</string>
+		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Modules</key>
+		<dict>
+			<key>symlink</key>
+			<string>Versions/Current/Modules</string>
+		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Resources</key>
+		<dict>
+			<key>symlink</key>
+			<string>Versions/Current/Resources</string>
+		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/A/DotLottiePlayer</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			wj8Dkc1gDpKAUL1NVZuQIAipTAk=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			R1xhaoQ8AbiceowBppCGBsT4D5e3+yW49TzfsWv2rgU=
 			</data>
 		</dict>
-		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Info.plist</key>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/A/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			V2cz6bmFPhxvhWVWcQHxazor+7I=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			6WAh9Ry3pOPEY52Vm2CNj2U5JudlSAUAyCuINc2a5QI=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
-		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Modules/module.modulemap</key>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/A/Modules/module.modulemap</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -255,37 +264,53 @@
 			5ShVkpipSp0L5kMGj5e+6G0fXXnd+JTo7SApBUcsgek=
 			</data>
 		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/A/Resources/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1JEeamjSKnskRIIdviZl01N8sP4=
+			</data>
+			<key>hash2</key>
+			<data>
+			0b4pcORnTn0NT98MnC5cMAAsxpzsTp7ODPvrG4WqPAg=
+			</data>
+		</dict>
+		<key>ios-arm64_x86_64-maccatalyst/DotLottiePlayer.framework/Versions/Current</key>
+		<dict>
+			<key>symlink</key>
+			<string>A</string>
+		</dict>
 		<key>ios-arm64_x86_64-simulator/DotLottiePlayer.framework/DotLottiePlayer</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			wlw8pjZlH3T0woUCCsiHxqKYiYE=
+			59B+6bjGqCXX8lmdtkgQwBi8QuM=
 			</data>
 			<key>hash2</key>
 			<data>
-			Rbj8pjh66q9Rt3pZFGDS1ckJbPh6u5z3aXtfCGe0tDE=
+			zH2ss7v1Mn8HhBSiZ9IoOP+bH4R8c0MP5jyB7zmVq9A=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/DotLottiePlayer.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			e76DOo3CyzEtVJYCeoNMQVk+5d4=
+			RpdmJ7P1eGB2/NAuwjsVeuyvi/g=
 			</data>
 			<key>hash2</key>
 			<data>
-			Bqpfy6g8E3d+vgPOQiIZtKyomEpWGnvHs71d//MHi48=
+			AnP1JJIzBk79viuXZAMOi1BfNQi89QSWuoScTo7VEaw=
 			</data>
 		</dict>
 		<key>ios-arm64_x86_64-simulator/DotLottiePlayer.framework/Modules/module.modulemap</key>
@@ -323,22 +348,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ERti5Od+DFW2ZHqq4xdXR+ixKgc=
+			K5td/80EtnxjLP3f8SRlYXc38JE=
 			</data>
 			<key>hash2</key>
 			<data>
-			+ruY5f83JNL76QI2X0KB9sqeV6mAXqWtd37fWuxwLuM=
+			xWvoPX/mg+LPY7O/3v17dNi4Q3g3osV3ZT4+FMwDcJU=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/DotLottiePlayer.framework/Versions/A/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/DotLottiePlayer.framework/Versions/A/Modules/module.modulemap</key>
@@ -356,11 +381,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			xTkrODOz3gc1H9gZCORVhcsPIZs=
+			hA/0z8T+TAM5xv9DMfx3F+6H+oU=
 			</data>
 			<key>hash2</key>
 			<data>
-			OOvWFxfnP2wNc5ur63Yy7+j+0Pm/fDBAxa5qfFxeMHI=
+			wNa6nmkI8QDwkAJ2/AyB2KfxVaNRcG+gXbN+JRwm9Wo=
 			</data>
 		</dict>
 		<key>macos-arm64_x86_64/DotLottiePlayer.framework/Versions/Current</key>
@@ -372,33 +397,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5safLMqxTKRS6oNtXMcyZpKDPrU=
+			MjL/CEMBw4KKogSGh/P7NCHjkWA=
 			</data>
 			<key>hash2</key>
 			<data>
-			TRY62KxpgwkAFQWcxTZFFuSdjIqWvlAq7BpiP1I4/Uk=
+			lQ9OnJzhu8ciBS+rXA5Zrl9N3FujAcugEzNZ/3Z3jLE=
 			</data>
 		</dict>
 		<key>tvos-arm64-simulator/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>tvos-arm64-simulator/DotLottiePlayer.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/RuxdGhYzFgIfFI90PboGIY0LZo=
+			2XmbAwIconBMZAPi3APXU6HnJBA=
 			</data>
 			<key>hash2</key>
 			<data>
-			/SI64nfZtAL5A+ewLRMi4mhfji1NOlw1wycv5FbYYjY=
+			PSXeUKkY43y4Mz32EcjpVZZWIAgpZNkiEO7FIvzRiwE=
 			</data>
 		</dict>
 		<key>tvos-arm64-simulator/DotLottiePlayer.framework/Modules/module.modulemap</key>
@@ -416,33 +441,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			TyfSFACbJ1r44ttzWjWUJJwiaJ0=
+			VmMI/d6Nl9aOJUN7C5ghQatdBXg=
 			</data>
 			<key>hash2</key>
 			<data>
-			ZcasVABDQE0OhWlntD0aW3gmZkIEI98DkvpISHrWuj4=
+			dVNPZKie5kuzXMN53GaBGsgw4V0Fk+s4uyrpHSafPVQ=
 			</data>
 		</dict>
 		<key>tvos-arm64/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>tvos-arm64/DotLottiePlayer.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			UvICZ0P2IYAf324EUG/XqGewCnM=
+			GfzGxYPz2Ox1b/0rYz40kqRBRJ4=
 			</data>
 			<key>hash2</key>
 			<data>
-			IAvGHnym1wLdHhn4VOWq7nMdw2tWxO+9XhMs+X1DIUE=
+			4FarWwALubPX0PRnaAC5c/4tulYyNdCjksffrDIr3N0=
 			</data>
 		</dict>
 		<key>tvos-arm64/DotLottiePlayer.framework/Modules/module.modulemap</key>
@@ -460,33 +485,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			bbmreGXs+fy5Y22XJcVu18hhYa4=
+			NamT5Qn/QbUR30bj1gCo7/2rnTk=
 			</data>
 			<key>hash2</key>
 			<data>
-			CiQ65yngTVAFPVVoAQjZO4G/bjwQP0XPNhLMxIfDCwc=
+			AM85QLMNvDU6EKN4Vs1a+vaswxoe6uhaipf/rUwUDfA=
 			</data>
 		</dict>
 		<key>watchos-arm64-simulator/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>watchos-arm64-simulator/DotLottiePlayer.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			lt7glex+JXJxT3xnIPrcMgh9wH8=
+			WMSwpxkSId7CJ3uz3ctav6SvDT4=
 			</data>
 			<key>hash2</key>
 			<data>
-			Z63zVMmrue01eQSjR/4nkqzCDzF+KPfWzkgJvlPkgQw=
+			In3epN42uSHiOmYOycJMTQQNDf+ffjju5OG2/HtC2Q8=
 			</data>
 		</dict>
 		<key>watchos-arm64-simulator/DotLottiePlayer.framework/Modules/module.modulemap</key>
@@ -504,33 +529,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G9A6+lmrm6vLay0+HuYH6JT+laA=
+			xxZxTj4oDewDD+vA+kKX3RfmLVw=
 			</data>
 			<key>hash2</key>
 			<data>
-			KEq1Kcg2QOdVJ70qAMyyIgxya+/02kOoRs2lkjuhado=
+			quMWf5rCam5+TcDauI2QxU20v+A+cJcr5/FavXbV9uw=
 			</data>
 		</dict>
 		<key>watchos-arm64_arm64_32_armv7k/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>watchos-arm64_arm64_32_armv7k/DotLottiePlayer.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			CNQd3rXDBYxDW7HOAQwtEKOOb3s=
+			B11EYxEcCCsj4itkVIogKdseHAQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			4eeUCjHgQ0tfridYihIDlg2BlKgv8eQlrx9xM7EZObc=
+			5wH2Fz+GlTpEMCvsndFL9vqAGXNVKCUFngVLqkuCOVk=
 			</data>
 		</dict>
 		<key>watchos-arm64_arm64_32_armv7k/DotLottiePlayer.framework/Modules/module.modulemap</key>
@@ -548,33 +573,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ZzkJLvlGI1mvridn04V09xKRlC8=
+			J8uJq97C8KXI533jD8IpTd23RLs=
 			</data>
 			<key>hash2</key>
 			<data>
-			VSPJ1yALxM7qiCBlBMCjWy+zKtD4pMEbNa8gOJKeqWo=
+			E5cFP5GUZarv12C5Ct5LKQQNJnCO8uL7SaObmeLWGK8=
 			</data>
 		</dict>
 		<key>xros-arm64-simulator/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>xros-arm64-simulator/DotLottiePlayer.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			PfrszzeyUIe70pFmDFxwQm+RajI=
+			t98iiCWJjDreUaxbLg6YwzwqXd4=
 			</data>
 			<key>hash2</key>
 			<data>
-			xhUrmjG1BtTC61wUuXgd0FQiFr3yF1N6wSnOTdiWRC8=
+			8lfqdrwL6BPPVpGQ7pJXU9sU2qZPvpsbuSQL5K8XJ1E=
 			</data>
 		</dict>
 		<key>xros-arm64-simulator/DotLottiePlayer.framework/Modules/module.modulemap</key>
@@ -592,33 +617,33 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SQ6OSUYbAJAKj+ifdKMa5+22urk=
+			vduH1bN/aNLx47BnOwKGB/A+VD8=
 			</data>
 			<key>hash2</key>
 			<data>
-			6e6v4ANEQgtNOer/9ut5xikv/n/ekysMLzPW2Q1ZKQI=
+			DpBIY1IPN325BxfJ49KZ32q59czl+h0T9qvckZUQI/Q=
 			</data>
 		</dict>
 		<key>xros-arm64/DotLottiePlayer.framework/Headers/dotlottie_player.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			OAe14LVbC4ePoczrR6/zwOZDX4s=
+			CChfpzl72sd8FPTtZj4BH8N3myw=
 			</data>
 			<key>hash2</key>
 			<data>
-			7TQMC7GsxX/PVHjpFEYfhvBR4bC6qRYElATocaQeKC4=
+			9eF8NqU3pWhXCxyZ8V4ouDN6QVtKCir4+W6UaSKDiOA=
 			</data>
 		</dict>
 		<key>xros-arm64/DotLottiePlayer.framework/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			YOI0LSVvO2Awt9Kt8KMOURYCw/s=
+			0UaN7afnDq3myTAxbqWU9uo4HUE=
 			</data>
 			<key>hash2</key>
 			<data>
-			CogWWOxatXrHwfjbLWPFX2Qgr2YR5aGxnkWEqY9ZLmo=
+			6Fplgt81jq5h6kQE9sodz6MTDfdmqfNybXIt9TVisbU=
 			</data>
 		</dict>
 		<key>xros-arm64/DotLottiePlayer.framework/Modules/module.modulemap</key>
