@@ -38,8 +38,6 @@ struct MetricsOverlay: View {
             metric("CPU", String(format: "%.0f%%", monitor.cpuPercent))
             divider
             metric("MEM", String(format: "%.0f MB", monitor.memoryMB))
-            divider
-            metric("FRAME", String(format: "%.1f ms", monitor.renderMs))
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
