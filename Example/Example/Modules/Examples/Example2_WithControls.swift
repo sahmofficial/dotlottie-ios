@@ -5,6 +5,8 @@
 //  Animation with playback controls
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 import DotLottie
 
@@ -80,4 +82,6 @@ struct Example2_WithControls: View {
         }
     }
 }
+
+#endif
 

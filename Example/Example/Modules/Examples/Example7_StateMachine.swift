@@ -5,6 +5,8 @@
 //  State machine example with interactivity
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 import DotLottie
 
@@ -703,4 +705,6 @@ class StateMachineExampleViewModel: ObservableObject {
         stopStatePolling()
     }
 }
+
+#endif
 

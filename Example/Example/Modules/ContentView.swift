@@ -8,6 +8,8 @@
 import SwiftUI
 import DotLottie
 
+#if !os(tvOS)
+
 struct ContentView: View {
     var body: some View {
         // Use NavigationSplitView where available (macOS 13+/iOS 16+) — the modern
@@ -198,3 +200,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+#endif

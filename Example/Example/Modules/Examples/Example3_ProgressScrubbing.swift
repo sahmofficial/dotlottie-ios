@@ -5,6 +5,8 @@
 //  Progress control and scrubbing example
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 import DotLottie
 
@@ -85,4 +87,6 @@ struct Example3_ProgressScrubbing: View {
         }
     }
 }
+
+#endif
 

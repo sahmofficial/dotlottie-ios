@@ -3,7 +3,7 @@ import SwiftUI
 
 // MARK: - DotLottiePlayerView
 
-@available(iOS 14.0, macOS 11.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, *)
 public struct DotLottiePlayerView<Placeholder: View>: View {
     
     // MARK: - Lifecycle
@@ -228,7 +228,7 @@ public enum DotLottiePlaybackMode {
 
 // MARK: - DotLottiePlayerViewRepresentable
 
-@available(iOS 14.0, macOS 11.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, *)
 private struct DotLottiePlayerViewRepresentable: PlatformViewRepresentable {
     
     #if canImport(UIKit)

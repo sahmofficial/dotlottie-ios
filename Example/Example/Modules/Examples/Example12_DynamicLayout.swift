@@ -5,6 +5,8 @@
 //  Dynamically change the animation layout (fit + alignment) at runtime.
 //
 
+#if !os(tvOS)
+
 import SwiftUI
 import DotLottie
 
@@ -91,3 +93,5 @@ struct Example12_DynamicLayout_Previews: PreviewProvider {
         ScrollView { Example12_DynamicLayout() }
     }
 }
+
+#endif
