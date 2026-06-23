@@ -8,6 +8,8 @@
 import SwiftUI
 import DotLottie
 
+#if !os(tvOS)
+
 struct SwiftUIExampleView: View {
     @State private var showInfo = false
     
@@ -56,3 +58,5 @@ struct SwiftUIExampleView_Previews: PreviewProvider {
         SwiftUIExampleView()
     }
 }
+
+#endif

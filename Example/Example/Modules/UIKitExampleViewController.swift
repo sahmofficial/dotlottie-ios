@@ -4,7 +4,8 @@
 //
 //  Example of using DotLottiePlayerUIView (UIKit approach similar to LottieAnimationView)
 //
-#if canImport(UIKit)
+
+#if canImport(UIKit) && !os(tvOS)
 import UIKit
 import DotLottie
 

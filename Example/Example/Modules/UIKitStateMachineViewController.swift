@@ -4,7 +4,8 @@
 //
 //  UIKit state machine example
 //
-#if canImport(UIKit)
+
+#if canImport(UIKit) && !os(tvOS)
 import UIKit
 import SwiftUI
 import DotLottie

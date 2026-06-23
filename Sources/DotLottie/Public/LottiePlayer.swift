@@ -964,7 +964,7 @@ open class DotLottiePlayerUIView: PlatformView {
     }
 }
 
-#if os(iOS)
+#if os(iOS) || os(tvOS)
 extension DotLottiePlayerUIView: UIGestureRecognizerDelegate, GestureManagerDelegate {
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
