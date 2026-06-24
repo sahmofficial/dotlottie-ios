@@ -34,6 +34,30 @@ xcodebuild -create-xcframework \
     -output "$COCOAPODS_DIR/DotLottiePlayer.xcframework"
 
 # ---------------------------------------------------------------------------
+# Re-point DotLottiePlayer at the wrapped WgpuNative.framework.
+#
+# The prebuilt DotLottiePlayer slices link the raw wgpu dylib by its original
+# name — most via "@rpath/libwgpu_native.dylib", and the iOS arm64 *simulator*
+# slice via an absolute CI build path (.../libwgpu_native.dylib). For CocoaPods
+# we ship wgpu wrapped as WgpuNative.framework (below), so none of those
+# references resolve at runtime: the app crashes at launch with
+# "Library not loaded: .../libwgpu_native.dylib". Rewrite every libwgpu_native
+# reference, across all arch slices, to the framework's install name.
+# (SPM is unaffected — it ships the raw dylib, so the original name still matches.)
+# ---------------------------------------------------------------------------
+WGPU_INSTALL_NAME="@rpath/WgpuNative.framework/WgpuNative"
+while IFS= read -r dlp_bin; do
+    refs=$(for arch in $(lipo -archs "$dlp_bin"); do
+        otool -arch "$arch" -L "$dlp_bin"
+    done | awk '/libwgpu_native\.dylib/ { print $1 }' | sort -u)
+    for ref in $refs; do
+        [ "$ref" = "$WGPU_INSTALL_NAME" ] && continue
+        install_name_tool -change "$ref" "$WGPU_INSTALL_NAME" "$dlp_bin"
+    done
+done < <(find "$COCOAPODS_DIR/DotLottiePlayer.xcframework" \
+    -type f -name DotLottiePlayer -path '*/DotLottiePlayer.framework/*')
+
+# ---------------------------------------------------------------------------
 # WgpuNative — wrap each .dylib slice into a WgpuNative.framework.
 # ---------------------------------------------------------------------------
 
