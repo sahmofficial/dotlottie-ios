@@ -333,6 +333,39 @@ public class DotLottieWebGPUView: PlatformBase {
         return true
     }
 
+    /// Load a .json or .lottie animation from a remote URL.
+    ///
+    /// The file is fetched asynchronously; once downloaded it is handed to the
+    /// existing load path (which defers until the WebGPU canvas is ready). The
+    /// extension is inferred from the URL: a path containing `.lottie` is loaded
+    /// as dotLottie data, otherwise the body is treated as Lottie JSON.
+    ///
+    /// - Returns: `true` if the URL was valid and a fetch was started; the actual
+    ///   load result is delivered through the player's `Observer` (`onLoad` /
+    ///   `onLoadError`). Subscribe via `subscribe(observer:)` to observe it.
+    @discardableResult
+    public func loadAnimation(webURL: String) -> Bool {
+        guard let url = URL(string: webURL) else { return false }
+        Task { [weak self] in
+            let data: Data
+            do {
+                data = try await fetchFileFromURL(url: url)
+            } catch {
+                print("[DotLottieWebGPUView] Failed to load animation from URL: \(error)")
+                return
+            }
+            await MainActor.run { [weak self] in
+                guard let self else { return }
+                if webURL.contains(".lottie") {
+                    self.loadDotlottie(data: data)
+                } else {
+                    self.loadAnimationData(String(decoding: data, as: UTF8.self))
+                }
+            }
+        }
+        return true
+    }
+
     private func loadAnimationImmediate(fileName: String, bundle: Bundle) -> Bool {
         if let url = bundle.url(forResource: fileName, withExtension: "json"),
            let data = try? String(contentsOf: url) {

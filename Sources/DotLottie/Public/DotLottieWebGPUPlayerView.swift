@@ -11,6 +11,7 @@ public struct DotLottieWebGPUPlayerView: ViewRepresentable {
     private let config: Config
     private let fileName: String?
     private let animationData: String?
+    private let webURL: String?
     private let bundle: Bundle
     private let onViewCreated: ((DotLottieWebGPUView) -> Void)?
 
@@ -32,6 +33,7 @@ public struct DotLottieWebGPUPlayerView: ViewRepresentable {
     ) {
         self.fileName = fileName
         self.animationData = nil
+        self.webURL = nil
         self.bundle = bundle
         self.config = config
         self.onViewCreated = onViewCreated
@@ -45,6 +47,25 @@ public struct DotLottieWebGPUPlayerView: ViewRepresentable {
     ) {
         self.fileName = nil
         self.animationData = animationData
+        self.webURL = nil
+        self.bundle = .main
+        self.config = config
+        self.onViewCreated = onViewCreated
+    }
+
+    /// Load a .json or .lottie animation from a remote URL.
+    ///
+    /// The file is fetched asynchronously and rendered once it finishes
+    /// downloading. The extension is inferred from the URL (`.lottie` → dotLottie,
+    /// otherwise Lottie JSON).
+    public init(
+        webURL: String,
+        config: Config = Config(),
+        onViewCreated: ((DotLottieWebGPUView) -> Void)? = nil
+    ) {
+        self.fileName = nil
+        self.animationData = nil
+        self.webURL = webURL
         self.bundle = .main
         self.config = config
         self.onViewCreated = onViewCreated
@@ -58,6 +79,8 @@ public struct DotLottieWebGPUPlayerView: ViewRepresentable {
             view.loadAnimation(fileName: name, bundle: bundle)
         } else if let data = animationData {
             view.loadAnimationData(data)
+        } else if let webURL {
+            view.loadAnimation(webURL: webURL)
         }
         // Deferred to the next runloop tick: `makeView` runs during SwiftUI's
         // update pass, so invoking the callback synchronously would let callers
