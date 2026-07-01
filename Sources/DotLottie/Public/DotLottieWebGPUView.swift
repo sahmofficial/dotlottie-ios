@@ -186,7 +186,14 @@ public class DotLottieWebGPUView: PlatformBase {
 
 #if os(iOS)
     private func startDisplayLink() {
-        displayLink = CADisplayLink(target: self, selector: #selector(onDisplayLink))
+        // CADisplayLink strongly retains its `target`, and the run loop it is added
+        // to strongly retains the CADisplayLink. Passing `self` directly would create
+        // a retain cycle (self -> displayLink -> self, plus run loop -> displayLink),
+        // so the view — and its WgpuContext / GPU resources — would never be released
+        // and `deinit` (which calls stopDisplayLink) would never run.
+        // Route through a weak proxy so the link never keeps the view alive.
+        let proxy = DisplayLinkProxy(target: self)
+        displayLink = CADisplayLink(target: proxy, selector: #selector(DisplayLinkProxy.onDisplayLink(_:)))
         displayLink?.add(to: .main, forMode: .common)
     }
 
@@ -195,7 +202,10 @@ public class DotLottieWebGPUView: PlatformBase {
         displayLink = nil
     }
 
-    @objc private func onDisplayLink(_ link: CADisplayLink) {
+    // `fileprivate` (not `private`) so the file-scoped `DisplayLinkProxy` can forward
+    // ticks to it. `private` would restrict access to this type and its same-file
+    // extensions only, so the separate proxy class could not call it.
+    @objc fileprivate func onDisplayLink(_ link: CADisplayLink) {
         performTick()
     }
 
@@ -523,5 +533,25 @@ extension DotLottieWebGPUView: GestureManagerDelegate {
     }
 #endif
 }
+
+#if os(iOS)
+/// Weak proxy used as the CADisplayLink target to avoid a retain cycle.
+///
+/// CADisplayLink keeps a strong reference to its target for its whole lifetime, so
+/// targeting the view directly would pin the view in memory (see `startDisplayLink`).
+/// This proxy holds the view weakly and forwards ticks, letting the view deallocate
+/// normally; `deinit` then invalidates the link and the proxy's `target` goes nil.
+private final class DisplayLinkProxy {
+    private weak var target: DotLottieWebGPUView?
+
+    init(target: DotLottieWebGPUView) {
+        self.target = target
+    }
+
+    @objc func onDisplayLink(_ link: CADisplayLink) {
+        target?.onDisplayLink(link)
+    }
+}
+#endif
 
 #endif

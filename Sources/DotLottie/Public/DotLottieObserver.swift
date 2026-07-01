@@ -8,7 +8,10 @@
 import Foundation
 
 class DotLottieObserver: Observer {
-    var observedPlayer: Player?
+    // Held weakly: the underlying Player retains the observers registered with it, so a
+    // strong reference back to the Player here would create a Player <-> observer retain
+    // cycle and leak both objects.
+    weak var observedPlayer: Player?
     
     init(_ observedPlayer: Player) {
         self.observedPlayer = observedPlayer
