@@ -86,17 +86,6 @@ class InteractiveMTKView: MTKView {
 
 // Unified Coordinator for all platforms
 public class Coordinator: NSObject, MTKViewDelegate {
-    // The Coordinator is owned by its view: on the UIKit path `DotLottieAnimationView`
-    // holds the Coordinator strongly AND installs it as the MTKView delegate. Storing
-    // the `parent` view here strongly (the previous `private var parent: DotLottie`)
-    // created a retain cycle on that class path — view -> coordinator -> view — so
-    // neither the view nor its Metal resources were ever released.
-    //
-    // The Coordinator only ever needs the shared `DotLottieAnimation` view model, so we
-    // capture that instead of the whole view. The view model is a separate object that
-    // does not reference the view back, so no cycle can form. (The SwiftUI `DotLottieView`
-    // is a value-type struct and never cycled, but going through the view model keeps
-    // both paths consistent.)
     private let viewModel: DotLottieAnimation
     private var ciContext: CIContext!
     private var metalDevice: MTLDevice!
@@ -110,16 +99,10 @@ public class Coordinator: NSObject, MTKViewDelegate {
     private var dpr: CGFloat = 1.0
     private var gestureManager: GestureManager!
     private var observerSetup = false
-    // Retains the token returned by the block-based NotificationCenter observer so it can
-    // be removed in `deinit`. `removeObserver(self)` does NOT unregister block-based
-    // observers, so without storing and explicitly removing this token the observer
-    // registration (and its captured block) would leak for every Coordinator created.
     private var screenChangeObserver: NSObjectProtocol?
 #endif
     
     init(_ parent: DotLottie, mtkView: MTKView) {
-        // Capture only the shared view model, never the parent view, to avoid the
-        // view <-> coordinator retain cycle described above.
         self.viewModel = parent.dotLottieViewModel
 #if os(macOS)
         self.mtkView = mtkView
@@ -316,8 +299,6 @@ public class Coordinator: NSObject, MTKViewDelegate {
     deinit {
         NotificationCenter.default.removeObserver(self)
 #if os(macOS)
-        // Block-based observers are not covered by removeObserver(self); remove the
-        // stored token explicitly to avoid leaking the registration.
         if let screenChangeObserver {
             NotificationCenter.default.removeObserver(screenChangeObserver)
         }
